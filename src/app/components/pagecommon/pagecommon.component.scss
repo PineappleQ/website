@@ -1,0 +1,82 @@
+.funcitems{
+    padding: 1rem 0;
+    a{
+        float: left;
+        width: 20%;
+        text-decoration: none;
+        color: #000000;
+        p{
+            margin: 0;
+        }
+    }
+    img{
+        width: 4.5rem;
+        height: 4.5rem;
+        margin-bottom: .4rem;
+    }
+    &:after{
+        display: block;
+        content: '';
+        clear: both;
+    }
+}
+.info{
+    padding: 1rem;
+    background-color: #EFEFF4; 
+    .infoitem{
+        float: left;
+    }
+    &:after{
+        display: block;
+        content: '';
+        clear: both;
+    }
+    .trumpet-icon{
+        width: 2rem;
+        height: 1.6rem;
+        background-size: 100%;
+        vertical-align: bottom;
+        margin-right: 0.5rem;
+    }
+    .reload-icon{
+        width: 1.3rem;
+        height: 1.3rem;
+        background-size: 100%;
+        vertical-align: middle;
+        margin-left: 0.5rem;
+    }
+    .refresh{
+        font-weight: 600;
+        color: #1089E0;
+        margin-left: 0.5rem;
+    }
+}
+.result-list{
+    position: relative;
+    .list-item-container{
+        padding: 0.6rem 0;
+        .list-item{
+            float: left;
+        }
+        .issue{
+            width: 30%;
+        }
+        .date{
+            width: 35%;
+        }
+        .result{
+            width: 35%;
+        }
+        &:after{
+            display: block;
+            content: '';
+            clear: both;
+        }
+    }
+    .list-header{
+        background-color: #1089E0;
+        font-size: 1.6rem;
+        color: #FFFFFF;
+        height: 3.5rem;
+    }
+}

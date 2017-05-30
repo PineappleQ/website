@@ -1,5 +1,7 @@
-import { TabAComponent } from './pages/tabA/taba.component';
-import { TabBComponent } from './pages/tabB/tabB.component';
+import { PageCommonComponent } from './components/pagecommon/pagecommon.component';
+import { CanadaComponent } from './pages/Canada/Canada.component';
+import { LuckyComponent } from './pages/lucky/lucky.component';
+import { DenmarkComponent } from './pages/Denmark/Denmark.component';
 import { IndexComponent } from './pages/index/index.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -12,20 +14,26 @@ import { AppComponent } from './app.component';
   declarations: [
     AppComponent,
     IndexComponent,
-    TabAComponent,
-    TabBComponent
+    LuckyComponent,
+    DenmarkComponent,
+    CanadaComponent,
+    PageCommonComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
-    IonicModule.forRoot(AppComponent)
+    IonicModule.forRoot(AppComponent,{
+      iconMode: 'md',
+      tabsPlacement: 'top'
+    })
   ],
   providers: [],
   entryComponents: [
     IndexComponent,
-    TabAComponent,
-    TabBComponent
+    LuckyComponent,
+    DenmarkComponent,
+    CanadaComponent
   ],
   bootstrap: [IonicApp]
 })

@@ -1,5 +1,6 @@
-import { TabBComponent } from './../tabB/tabB.component';
-import { TabAComponent } from './../tabA/taba.component';
+import { CanadaComponent } from './../Canada/Canada.component';
+import { DenmarkComponent } from './../Denmark/Denmark.component';
+import { LuckyComponent } from './../lucky/lucky.component';
 import { Component } from '@angular/core';
 @Component({
     selector: 'index',
@@ -7,6 +8,7 @@ import { Component } from '@angular/core';
     styleUrls: ['./index.component.scss']
 })
 export class IndexComponent {
-    taba: any = TabAComponent;
-    tabb: any = TabBComponent;
+    lucky: any = LuckyComponent;
+    Denmark: any = DenmarkComponent;
+    Canada:any = CanadaComponent;
 }
