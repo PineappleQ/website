@@ -6,3 +6,28 @@ html,body{
 .text-center{
     text-align: center !important;
 }
+.header{
+    background-color: #000000;
+    color: #fff;
+    height: 4rem;
+    line-height: 4rem;
+    font-size: 1.8rem;
+    text-align: center;
+}
+.clear-float{
+    &:after{
+        display: block;
+        content: '';
+        clear: both;
+    }
+}
+.back-btn{
+    position: absolute;
+    left: 1.5rem;
+}
+.vertical-center{
+    display: -webkit-flex;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}

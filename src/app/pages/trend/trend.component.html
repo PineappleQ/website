@@ -1,0 +1,10 @@
+<ion-header class="header">
+    <span>走势图</span>
+</ion-header>
+<ion-content>
+    <ion-list>
+        <div ion-item *ngFor="let item of items" (click)="navDetail(item)">
+            <span>{{item.name}}</span>
+        </div>
+    </ion-list>
+</ion-content>

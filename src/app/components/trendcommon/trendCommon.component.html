@@ -1,0 +1,16 @@
+<div>
+    <div>
+        <span>期号</span>
+        <span>开奖结果</span>
+        <span>大小</span>
+        <span>单双</span>
+        <span>号码</span>
+    </div>
+    <div *ngFor="let item of items">
+        <span>{{item.issue}}</span>
+        <span>{{item.result}}</span>
+        <span>{{item.bigOrLittle}}</span>
+        <span>{{item.oddOrEven}}</span>
+        <span>{{item.num}}</span>
+    </div>
+</div>

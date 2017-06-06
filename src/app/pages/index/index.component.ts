@@ -1,6 +1,7 @@
-import { CanadaComponent } from './../Canada/Canada.component';
-import { DenmarkComponent } from './../Denmark/Denmark.component';
-import { LuckyComponent } from './../lucky/lucky.component';
+import { UserCenterComponent } from './../userCenter/userCenter.component';
+import { TrendComponent } from './../trend/trend.component';
+import { HistoryComponent } from './../history/history.component';
+import { PurchaseComponent } from './../purchase/purchase.component';
 import { Component } from '@angular/core';
 @Component({
     selector: 'index',
@@ -8,7 +9,9 @@ import { Component } from '@angular/core';
     styleUrls: ['./index.component.scss']
 })
 export class IndexComponent {
-    lucky: any = LuckyComponent;
-    Denmark: any = DenmarkComponent;
-    Canada:any = CanadaComponent;
+    purchase: any = PurchaseComponent;
+    history: any = HistoryComponent;
+    trend: any = TrendComponent;
+    userCenter:any = UserCenterComponent;
+    isMenuOpen: boolean = false;
 }

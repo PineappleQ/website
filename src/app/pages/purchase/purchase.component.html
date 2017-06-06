@@ -1,0 +1,21 @@
+<ion-header class="header" padding-horizontal>
+    <span>蛋蛋98</span>
+    <span class="intro-text" (click)="goIntro()">玩法介绍</span>
+</ion-header>
+<ion-content>
+    <div>
+        <!--<ion-input placeholder='搜索'></ion-input>-->
+        <ion-searchbar placeholder='搜索'></ion-searchbar>
+    </div>
+    <ion-list>
+        <div ion-item *ngFor="let item of items">
+            <ion-row>
+                <img class="room-logo" src="{{item.pic}}" alt="">
+                <div class="vertical-center" margin-left>
+                    <p>{{item.name}}</p>
+                    <p>{{item.describe}}</p>
+                </div>
+            </ion-row>
+        </div>
+    </ion-list>
+</ion-content>

@@ -1,7 +1,12 @@
-import { PageCommonComponent } from './components/pagecommon/pagecommon.component';
-import { CanadaComponent } from './pages/Canada/Canada.component';
-import { LuckyComponent } from './pages/lucky/lucky.component';
-import { DenmarkComponent } from './pages/Denmark/Denmark.component';
+import { IntroDetailComponent } from './pages/introdetail/introdetail.component';
+import { IntroComponent } from './pages/intro/intro.component';
+import { TrendDetailComponent } from './pages/trendDetail/trendDetail.component';
+import { TrendCommon } from './components/trendcommon/trendCommon.component';
+import { UserCenterComponent } from './pages/userCenter/userCenter.component';
+import { HistoryCommon } from './components/historycommon/historycommon.component';
+import { TrendComponent } from './pages/trend/trend.component';
+import { PurchaseComponent } from './pages/purchase/purchase.component';
+import { HistoryComponent } from './pages/history/history.component';
 import { IndexComponent } from './pages/index/index.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -14,10 +19,15 @@ import { AppComponent } from './app.component';
   declarations: [
     AppComponent,
     IndexComponent,
-    LuckyComponent,
-    DenmarkComponent,
-    CanadaComponent,
-    PageCommonComponent
+    PurchaseComponent,
+    HistoryComponent,
+    TrendComponent,
+    UserCenterComponent,
+    HistoryCommon,
+    TrendCommon,
+    TrendDetailComponent,
+    IntroComponent,
+    IntroDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -25,15 +35,20 @@ import { AppComponent } from './app.component';
     HttpModule,
     IonicModule.forRoot(AppComponent,{
       iconMode: 'md',
-      tabsPlacement: 'top'
+      tabsHideOnSubPages: true
     })
   ],
   providers: [],
   entryComponents: [
     IndexComponent,
-    LuckyComponent,
-    DenmarkComponent,
-    CanadaComponent
+    PurchaseComponent,
+    HistoryComponent,
+    UserCenterComponent,
+    TrendComponent,
+    TrendCommon,
+    TrendDetailComponent,
+    IntroComponent,
+    IntroDetailComponent
   ],
   bootstrap: [IonicApp]
 })

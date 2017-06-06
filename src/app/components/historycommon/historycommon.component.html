@@ -1,0 +1,14 @@
+<div class="result-list">
+    <div class="list-item-container list-header" text-center>
+        <div class="issue list-item">期号</div>
+        <div class="date list-item">开奖时间</div>
+        <div class="result list-item">开奖结果</div>
+    </div>
+    <div class="list-detail">
+        <div class="list-item-container" text-center *ngFor="let item of listItems">
+            <div class="issue list-item">{{item.issue}}</div>
+            <div class="date list-item">{{item.date}}</div>
+            <div class="result list-item">{{item.result}}</div>
+        </div>
+    </div>
+</div>

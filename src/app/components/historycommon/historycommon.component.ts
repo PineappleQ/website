@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 @Component({
-    selector: 'page-common',
-    templateUrl: './pagecommon.component.html',
-    styleUrls: ['./pagecommon.component.scss']
+    selector: 'history-common',
+    templateUrl: './historycommon.component.html',
+    styleUrls: ['./historycommon.component.scss']
 })
-export class PageCommonComponent{
+export class HistoryCommon{
     listItems = [
         {
             issue: '20170530',

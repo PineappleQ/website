@@ -1,3 +1,24 @@
 .logo{
-    height: 3.6rem;
+    height: 3rem;
+    top: 50%;
+    transform: translateY(-50%);
+    position: absolute;
+}
+.header{
+    height: 4rem;
+    position: relative;
+    &:after{
+        display: block;
+        content: '';
+        clear: both;
+    }
+}
+.header-menu{
+    font-size: 3rem;
+    margin-right: 1rem;
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #ccc;
 }
