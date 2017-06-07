@@ -7,35 +7,35 @@ import { Component } from '@angular/core';
 export class TrendCommon{
     items = [
         {
-            issue: '20170501',
+            issue: '2017051',
             result: '6+2+7=15',
             bigOrLittle: '小',
             oddOrEven: '双',
             num:'9105615'
         },
         {
-            issue: '20170501',
+            issue: '2017051',
             result: '6+2+7=15',
             bigOrLittle: '小',
             oddOrEven: '双',
             num:'9105615'
         },
         {
-            issue: '20170501',
+            issue: '2017051',
             result: '6+2+7=15',
             bigOrLittle: '小',
             oddOrEven: '双',
             num:'9105615'
         },
         {
-            issue: '20170501',
+            issue: '2017051',
             result: '6+2+7=15',
             bigOrLittle: '小',
             oddOrEven: '双',
             num:'9105615'
         },
         {
-            issue: '20170501',
+            issue: '2017051',
             result: '6+2+7=15',
             bigOrLittle: '小',
             oddOrEven: '双',

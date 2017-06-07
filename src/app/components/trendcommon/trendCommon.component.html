@@ -1,16 +1,16 @@
-<div>
-    <div>
-        <span>期号</span>
-        <span>开奖结果</span>
-        <span>大小</span>
-        <span>单双</span>
-        <span>号码</span>
-    </div>
-    <div *ngFor="let item of items">
-        <span>{{item.issue}}</span>
-        <span>{{item.result}}</span>
-        <span>{{item.bigOrLittle}}</span>
-        <span>{{item.oddOrEven}}</span>
-        <span>{{item.num}}</span>
-    </div>
+<div class="trend-container">
+    <ion-row class="trend-header">
+        <div col-2>期号</div>
+        <div col-3>开奖结果</div>
+        <div col-2>大小</div>
+        <div col-2>单双</div>
+        <div col-3>号码</div>
+    </ion-row>
+    <ion-row class="trend-item" *ngFor="let item of items">
+        <div col-2>{{item.issue}}</div>
+        <div col-3>{{item.result}}</div>
+        <div col-2>{{item.bigOrLittle}}</div>
+        <div col-2>{{item.oddOrEven}}</div>
+        <div col-3>{{item.num}}</div>
+    </ion-row>
 </div>
