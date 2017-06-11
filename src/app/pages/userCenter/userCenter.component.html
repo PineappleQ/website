@@ -10,10 +10,10 @@
         </div>
     </div>
     <ion-list class="func-list">
-        <div ion-item>
+        <div ion-item (click)="userFunction('gamelog')">
             <span>游戏记录</span>
         </div>
-        <div ion-item>
+        <div ion-item (click)="userFunction('payback')">
             <span>回水系统</span>
         </div>
     </ion-list>
@@ -21,7 +21,7 @@
         <div ion-item>
             <span>用户协议</span>
         </div>
-        <div ion-item>
+        <div ion-item (click)="userFunction('feedback')">
             <span>意见反馈</span>
         </div>
     </ion-list>
@@ -29,7 +29,7 @@
         <div ion-item>
             <span>关于我们</span>
         </div>
-        <div ion-item>
+        <div ion-item (click)="userFunction('cooperation')">
             <span>代理功能</span>
         </div>
     </ion-list>

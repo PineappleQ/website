@@ -31,3 +31,9 @@ html,body{
     flex-direction: column;
     justify-content: center;
 }
+.all-center{
+    display: -webkit-flex;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

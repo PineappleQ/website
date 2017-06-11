@@ -1,3 +1,8 @@
+import { CooperationComponent } from './pages/cooperation/cooperation.component';
+import { MyPayBackComponent } from './pages/mypayback/mypayback.component';
+import { PayBackComponent } from './pages/payback/payback.component';
+import { GameLogComponent } from './pages/gamelog/gamelog.component';
+import { FeedBackComponent } from './pages/feedback/feedback.component';
 import { IntroDetailComponent } from './pages/introdetail/introdetail.component';
 import { IntroComponent } from './pages/intro/intro.component';
 import { TrendDetailComponent } from './pages/trendDetail/trendDetail.component';
@@ -27,7 +32,12 @@ import { AppComponent } from './app.component';
     TrendCommon,
     TrendDetailComponent,
     IntroComponent,
-    IntroDetailComponent
+    IntroDetailComponent,
+    FeedBackComponent,
+    GameLogComponent,
+    PayBackComponent,
+    MyPayBackComponent,
+    CooperationComponent
   ],
   imports: [
     BrowserModule,
@@ -48,7 +58,12 @@ import { AppComponent } from './app.component';
     TrendCommon,
     TrendDetailComponent,
     IntroComponent,
-    IntroDetailComponent
+    IntroDetailComponent,
+    FeedBackComponent,
+    GameLogComponent,
+    PayBackComponent,
+    MyPayBackComponent,
+    CooperationComponent
   ],
   bootstrap: [IonicApp]
 })
