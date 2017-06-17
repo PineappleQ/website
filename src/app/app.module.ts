@@ -1,3 +1,15 @@
+import { ChatItem } from './components/chatitem/chatitem.component';
+import { RoomComponent } from './pages/room/room.component';
+import { LoginComponent } from './pages/login/login.component';
+import { AboutUsComponent } from './pages/aboutus/aboutus.component';
+import { ContactUsComponent } from './pages/contactus/contactus.component';
+import { SystemActivityComponent } from './pages/systemactivity/systemactivity.component';
+import { UserAgreementComponent } from "./pages/userAgreement/useragreement.component";
+import { SystemNotifyComponent } from './pages/systemnotify/systemnotify.component';
+import { UserService } from './service/userService';
+import { PlayService } from './service/playService';
+import { ServiceBase } from './service/ServiceBase';
+import { ContentManage } from './service/contentmanage';
 import { CooperationComponent } from './pages/cooperation/cooperation.component';
 import { MyPayBackComponent } from './pages/mypayback/mypayback.component';
 import { PayBackComponent } from './pages/payback/payback.component';
@@ -16,7 +28,7 @@ import { IndexComponent } from './pages/index/index.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+import { HttpModule, JsonpModule } from '@angular/http';
 import { IonicModule, IonicApp } from 'ionic-angular';
 import { AppComponent } from './app.component';
 
@@ -37,18 +49,32 @@ import { AppComponent } from './app.component';
     GameLogComponent,
     PayBackComponent,
     MyPayBackComponent,
-    CooperationComponent
+    CooperationComponent,
+    SystemNotifyComponent,
+    UserAgreementComponent,
+    SystemActivityComponent,
+    ContactUsComponent,
+    AboutUsComponent,
+    LoginComponent,
+    RoomComponent,
+    ChatItem
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
-    IonicModule.forRoot(AppComponent,{
+    JsonpModule,
+    IonicModule.forRoot(AppComponent, {
       iconMode: 'md',
       tabsHideOnSubPages: true
     })
   ],
-  providers: [],
+  providers: [
+    ServiceBase,
+    ContentManage,
+    PlayService,
+    UserService
+  ],
   entryComponents: [
     IndexComponent,
     PurchaseComponent,
@@ -63,7 +89,14 @@ import { AppComponent } from './app.component';
     GameLogComponent,
     PayBackComponent,
     MyPayBackComponent,
-    CooperationComponent
+    CooperationComponent,
+    SystemNotifyComponent,
+    UserAgreementComponent,
+    SystemActivityComponent,
+    ContactUsComponent,
+    AboutUsComponent,
+    LoginComponent,
+    RoomComponent
   ],
   bootstrap: [IonicApp]
 })

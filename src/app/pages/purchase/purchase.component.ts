@@ -1,3 +1,7 @@
+import { RoomComponent } from './../room/room.component';
+import { PlayService } from './../../service/playService';
+import { SystemActivityComponent } from './../systemactivity/systemactivity.component';
+import { SystemNotifyComponent } from './../systemnotify/systemnotify.component';
 import { IntroComponent } from './../intro/intro.component';
 import { NavController } from 'ionic-angular';
 import { Component } from '@angular/core';
@@ -8,39 +12,66 @@ import { Component } from '@angular/core';
 })
 export class PurchaseComponent {
     constructor(
-        public navCtrl: NavController
-    ) { }
+        public navCtrl: NavController,
+        private playSvr: PlayService
+    ) {
+        this.getRooms();
+    }
     introPage: any = IntroComponent;
-
+    rooms = [];
+    searchRooms = [];
+    keyWord = "";
     goIntro() {
         this.navCtrl.push(this.introPage);
     }
-    
-    items = [
-        {
-            name: '重庆28（3倍专场）',
-            describe: '5分钟一场',
-            pic: './assets/images/default.jpeg'
-        },
-        {
-            name: '重庆28（5倍专场）',
-            describe: '10分钟一场',
-            pic: './assets/images/default.jpeg'
-        },
-        {
-            name: '加拿大28（3倍专场）',
-            describe: '5分钟一场',
-            pic: './assets/images/default.jpeg'
-        },
-        {
-            name: '加拿大28（5倍专场）',
-            describe: '5分钟一场',
-            pic: './assets/images/default.jpeg'
-        },
-        {
-            name: '北京28（5倍专场）',
-            describe: '10分钟一场',
-            pic: './assets/images/default.jpeg'
-        }
-    ]
+
+    systemNotify() {
+        this.navCtrl.push(SystemNotifyComponent);
+    }
+
+    systemActivity() {
+        this.navCtrl.push(SystemActivityComponent);
+    }
+
+    getRooms() {
+        this.playSvr.getPlayRooms().subscribe(
+            data => {
+                let result = data.json();
+                if (!result.error) {
+                    this.rooms = result.data;
+                    this.playSvr.setRoomList(this.rooms);
+                }
+            },
+            error => {
+                console.log(error);
+            }
+        )
+    }
+
+    getInRomm(room) {
+        this.navCtrl.push(RoomComponent, {
+            roomId: room.id
+        })
+    }
+
+    // onInput($event) {
+    //     if (!this.keyWord) {
+    //         this.searchRooms = [];
+    //         return;
+    //     }
+    //     this.searchRooms = this.rooms.filter(r => {
+    //         return r.name.indexOf(this.keyWord) > -1;
+    //     });
+    // }
+
+    // onClear($event) {
+    //     this.searchRooms = [];
+    // }
+
+    // trackFn(index, room?) {
+    //     if (room) {
+    //         return room.id;
+    //     }
+    //     return index;
+    // }
 }

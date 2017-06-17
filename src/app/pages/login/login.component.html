@@ -1,0 +1,53 @@
+<ion-header class="header">
+    <span>{{title}}</span>
+</ion-header>
+<ion-content padding>
+    <form *ngIf="isLogin" class="login-form" (ngSubmit)="onLoginSubmit()">
+        <ion-item>
+            <ion-label floating>用户名</ion-label>
+            <ion-input clearInput name="loginAccount" [(ngModel)]="loginParams.user.account"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label floating>密码</ion-label>
+            <ion-input clearInput name="loginPassword" type="password" [(ngModel)]="loginParams.user.password"></ion-input>
+        </ion-item>
+        <div text-center margin-top>
+            <button class="login-btn" ion-button type="submit">登录</button>
+            <p class="login-txt" (click)="goRegister()">还没有账户？前往注册></p>
+        </div>
+    </form>
+
+    <form *ngIf="!isLogin" class="register-form">
+        <ion-item>
+            <ion-label floating>昵称</ion-label>
+            <ion-input clearInput name="registerName" [(ngModel)]="registerParams.user.name"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label floating>用户名</ion-label>
+            <ion-input clearInput name="registerAccount" [(ngModel)]="registerParams.user.account"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label floating>邮箱</ion-label>
+            <ion-input clearInput name="email" [(ngModel)]="registerParams.user.email"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label floating>密码</ion-label>
+            <ion-input clearInput name="registerPassword" type="password" [(ngModel)]="registerParams.user.password"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label floating>确认密码</ion-label>
+            <ion-input clearInput name="password_confirmation" type="password" [(ngModel)]="registerParams.user.password_confirmation"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label floating>验证码</ion-label>
+            <ion-input clearInput name="registerCaptcha" [(ngModel)]="registerParams.captcha"></ion-input>
+        </ion-item>
+        <ion-item>
+            <div #captchaContainer (click)="getCaptcha()"></div>
+        </ion-item>
+        <div text-center margin-top>
+            <button class="login-btn" ion-button type="submit" (click)="onRegisterSubmit()">注册</button>
+            <p class="login-txt" (click)="backToLogin()">已有账户？返回登录</p>
+        </div>
+    </form>
+</ion-content>

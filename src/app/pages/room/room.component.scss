@@ -1,0 +1,23 @@
+.send-btn{
+    align-self: flex-end;
+}
+.room-msg{
+    display: -webkit-flex;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+.chat-area{
+    flex: 1 1 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    background-color: #eee;
+}
+.send-body{
+    box-shadow: 0 0 5px #aaa;
+}
+
+.send-area{
+    border: 1px solid #dadada;
+    border-radius: 4px;
+}

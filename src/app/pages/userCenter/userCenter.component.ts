@@ -1,3 +1,8 @@
+import { User } from './../../model/model';
+import { UserService } from './../../service/userService';
+import { AboutUsComponent } from './../aboutus/aboutus.component';
+import { ContactUsComponent } from './../contactus/contactus.component';
+import { UserAgreementComponent } from './../userAgreement/useragreement.component';
 import { CooperationComponent } from './../cooperation/cooperation.component';
 import { PayBackComponent } from './../payback/payback.component';
 import { GameLogComponent } from './../gamelog/gamelog.component';
@@ -11,9 +16,12 @@ import { Component } from '@angular/core';
 })
 export class UserCenterComponent {
     constructor(
-        public nav: NavController
-    ) { }
-
+        public nav: NavController,
+        private userSvr: UserService
+    ) {
+        this.currentUser = this.userSvr.CurrentUser;
+    }
+    currentUser: User = <any>{}
     userFunctions = [
         {
             id: 'gamelog',
@@ -34,6 +42,21 @@ export class UserCenterComponent {
             id: 'cooperation',
             name: '代理功能',
             component: CooperationComponent
+        },
+        {
+            id: 'useragreement',
+            name: '用户协议',
+            component: UserAgreementComponent
+        },
+        {
+            id: 'contactus',
+            name: '联系我们',
+            component: ContactUsComponent
+        },
+        {
+            id: 'aboutus',
+            name: '关于我们',
+            component: AboutUsComponent
         }
     ]
 

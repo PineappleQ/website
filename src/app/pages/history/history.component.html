@@ -2,18 +2,10 @@
     <span>历史开奖</span>
 </ion-header>
 <ion-content>
-    <ion-row>
-        <div class="tab" col-4>
-            <span>蛋蛋98</span>
+    <div class="types-container">
+        <div class="type-item" [ngClass]="{'selected': type.selected}" *ngFor="let type of playTypes" (click)="selectTab(type)">
+            <span>{{type.text}}</span>
         </div>
-        <div class="tab" col-4>
-            <span>加拿大98</span>
-        </div>
-        <div class="tab" col-4>
-            <span>丹麦98</span>
-        </div>
-    </ion-row>
-    <history-common>
-        
-    </history-common>
+    </div>
+    <history-common [histories]="histories" [loading]="loading"></history-common>
 </ion-content>

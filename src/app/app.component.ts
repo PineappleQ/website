@@ -1,4 +1,4 @@
-import { IndexComponent } from './pages/index/index.component';
+import { LoginComponent } from './pages/login/login.component';
 import { Component } from '@angular/core';
 
 @Component({
@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  indexPage: any = IndexComponent;
+  indexPage: any = LoginComponent;
 }

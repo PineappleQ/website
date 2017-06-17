@@ -1,0 +1,37 @@
+.sender-avatar{
+    width: 3rem;
+    height: 3rem;
+}
+.sender-nickname{
+    opacity: 0.5;
+}
+.msg-content{
+    padding: 5px;
+    border-radius: 5px;
+    background-color: #fff; 
+}
+.msg-body{
+    flex: 1;
+    margin: 0 16px;
+    display: flex;
+    display: -webkit-flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+.self-msg{
+    justify-content: flex-end;
+    .sender-avatar{
+        order: 2;
+    }
+    .msg-body{
+        order: 1;
+        display: flex;
+        display: -webkit-flex;
+        flex-direction: column;
+        align-items: flex-end;
+    }
+    .msg-content{
+        background-color: #cea; 
+    }
+}

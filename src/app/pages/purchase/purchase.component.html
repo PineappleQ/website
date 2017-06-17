@@ -5,17 +5,29 @@
 <ion-content>
     <div>
         <!--<ion-input placeholder='搜索'></ion-input>-->
-        <ion-searchbar placeholder='搜索'></ion-searchbar>
+        <!--<ion-searchbar placeholder='搜索' [(ngModel)]="keyWord" autocomplete="on" (ionInput)="onInput($event)" (ionClear)="onClear($event)"></ion-searchbar>-->
     </div>
     <ion-list>
-        <div ion-item *ngFor="let item of items">
-            <ion-row>
-                <img class="room-logo" src="{{item.pic}}" alt="">
+        <div ion-item *ngFor="let room of rooms">
+            <div class="row" (click)="getInRomm(room)">
+                <ion-icon class="chat-icon" name="chatbubbles"></ion-icon>
                 <div class="vertical-center" margin-left>
-                    <p>{{item.name}}</p>
-                    <p>{{item.describe}}</p>
+                    <p>{{room.name}}</p>
+                    <p>{{room.description}}</p>
                 </div>
-            </ion-row>
+            </div>
+        </div>
+        <div ion-item (click)="systemNotify()">
+            <div class="row">
+                <ion-icon name="megaphone"></ion-icon>
+                <span>系统公告</span>
+            </div>
+        </div>
+        <div ion-item (click)="systemActivity()">
+            <div class="row">
+                <ion-icon name="heart-outline"></ion-icon>
+                <span>系统活动</span>
+            </div>
         </div>
     </ion-list>
 </ion-content>

@@ -5,44 +5,53 @@
     <div class="userinfo" padding>
         <img class="user-avatar" src="./assets/images/default.jpeg" alt="">
         <div margin-left>
-            <p>蛋蛋号：dandan8527</p>
+            <p>蛋蛋号：{{currentUser.user?currentUser.user.account:""}}</p>
             <p>剩余积分：987623</p>
         </div>
     </div>
     <ion-list class="func-list">
         <div ion-item (click)="userFunction('gamelog')">
+            <ion-icon name="book"></ion-icon>
             <span>游戏记录</span>
         </div>
         <div ion-item (click)="userFunction('payback')">
+            <ion-icon name="boat"></ion-icon>
             <span>回水系统</span>
         </div>
     </ion-list>
     <ion-list class="func-list">
-        <div ion-item>
+        <div ion-item (click)="userFunction('useragreement')">
+            <ion-icon name="clipboard"></ion-icon>
             <span>用户协议</span>
         </div>
         <div ion-item (click)="userFunction('feedback')">
+            <ion-icon name="cube"></ion-icon>
             <span>意见反馈</span>
         </div>
     </ion-list>
     <ion-list class="func-list">
-        <div ion-item>
+        <div ion-item (click)="userFunction('aboutus')">
+            <ion-icon name="pin"></ion-icon>
             <span>关于我们</span>
         </div>
         <div ion-item (click)="userFunction('cooperation')">
+            <ion-icon name="ribbon"></ion-icon>
             <span>代理功能</span>
         </div>
     </ion-list>
     <ion-list class="func-list">
         <div ion-item>
+            <ion-icon name="paper-plane"></ion-icon>
             <span>我要分享</span>
         </div>
         <div ion-item>
+            <ion-icon name="settings"></ion-icon>
             <span>设置</span>
         </div>
     </ion-list>
     <ion-list class="func-list">
-        <div ion-item>
+        <div ion-item (click)="userFunction('contactus')">
+            <ion-icon name="at"></ion-icon>
             <span>联系我们</span>
         </div>
     </ion-list>

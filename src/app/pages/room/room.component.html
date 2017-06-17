@@ -1,0 +1,15 @@
+<ion-header>
+    <ion-icon class="back-btn" (click)="goBack()" name="arrow-back"></ion-icon>
+    <span>{{currentRoom.name}}</span>
+</ion-header>
+<ion-content>
+    <div class="room-msg">
+        <div padding #chatArea class="chat-area">
+            <chat-item [message]="msg" [right]="currentUser.user.id==msg.sender.id" (domLoad)="chatDomLoad($event)" *ngFor="let msg of roomMessages.messages;trackBy:trackFn;"></chat-item>
+        </div>
+        <div padding class="row send-body">
+            <ion-textarea class="send-area" rows="3" [(ngModel)]="sendMsgContent"></ion-textarea>
+            <button class="send-btn" ion-button (click)="sendMsg()">发送</button>
+        </div>
+    </div>
+</ion-content>
