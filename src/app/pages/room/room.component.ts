@@ -1,6 +1,6 @@
 import { User } from './../../model/model';
 import { PlayService } from './../../service/playService';
-import { NavController, NavParams, AlertController } from 'ionic-angular';
+import { NavController, NavParams, AlertController, ToastController } from 'ionic-angular';
 import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
 
 @Component({
@@ -12,7 +12,7 @@ export class RoomComponent implements OnInit, OnDestroy {
     constructor(
         public navCtrl: NavController,
         private navParams: NavParams,
-        private alertCtrl: AlertController,
+        private toastCtrl: ToastController,
         private playSvr: PlayService
     ) { }
 
@@ -27,9 +27,10 @@ export class RoomComponent implements OnInit, OnDestroy {
         this.currentUser = this.playSvr.CurrentUser;
         let roomId = this.navParams.get("roomId");
         if (!roomId) {
-            this.alertCtrl.create({
+            let toast = this.toastCtrl.create({
                 message: '加载聊天室失败'
             });
+            toast.present();
             this.navCtrl.pop();
             return;
         }
@@ -39,9 +40,10 @@ export class RoomComponent implements OnInit, OnDestroy {
             this.currentRoom = room;
             this.getRoomInfo();
         } else {
-            this.alertCtrl.create({
+            let toast = this.toastCtrl.create({
                 message: '加载聊天室失败'
             });
+            toast.present();
             this.navCtrl.pop();
             return;
         }

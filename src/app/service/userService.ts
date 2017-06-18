@@ -2,7 +2,7 @@ import { RegisterParams, LoginParams } from './../model/model';
 import { ServiceBase } from './ServiceBase';
 import { Injectable } from '@angular/core';
 import { Headers } from '@angular/http';
-import * as md5 from "md5";
+// import * as md5 from "md5";
 
 @Injectable()
 export class UserService extends ServiceBase {

@@ -1,6 +1,6 @@
 import { IndexComponent } from './../index/index.component';
 import { UserService } from './../../service/userService';
-import { NavController } from 'ionic-angular';
+import { NavController, AlertController } from 'ionic-angular';
 import { LoginParams, RegisterParams } from './../../model/model';
 import { Component, ViewChild, ElementRef } from '@angular/core';
 
@@ -12,7 +12,8 @@ import { Component, ViewChild, ElementRef } from '@angular/core';
 export class LoginComponent {
     constructor(
         public navCtrl: NavController,
-        private userSvr: UserService
+        private userSvr: UserService,
+        public alertCtrl: AlertController
     ) { }
     title = "用户登录";
     isLogin: boolean = true;
@@ -45,18 +46,33 @@ export class LoginComponent {
                 }
             },
             error => {
-                console.log(error);
+                let errResult = error.json();
+                let alert = this.alertCtrl.create({
+                    message: errResult.message,
+
+                });
+                alert.present();
             }
         );
     }
 
     onRegisterSubmit() {
-        this.userSvr.registerUser(this.registerParams).subscribe(data => {
-            let result = data.json();
-            if (!result.error) {
-                this.userSvr.CurrentUser = result.data;
+        this.userSvr.registerUser(this.registerParams).subscribe(
+            data => {
+                let result = data.json();
+                if (!result.error) {
+                    this.userSvr.CurrentUser = result.data;
+                }
+            },
+            error => {
+                let errResult = error.json();
+                let alert = this.alertCtrl.create({
+                    message: errResult.message,
+
+                });
+                alert.present();
             }
-        })
+        )
     }
 
     goRegister() {
@@ -68,6 +84,7 @@ export class LoginComponent {
 
     backToLogin() {
         this.isLogin = true;
+        this.initLoginParam();
         this.title = "用户登录";
     }
 
@@ -93,6 +110,15 @@ export class LoginComponent {
                 password_confirmation: ""
             },
             captcha: "",
+        }
+    }
+
+    initLoginParam() {
+        this.loginParams = {
+            user: {
+                account: "",
+                password: ""
+            }
         }
     }
 }
