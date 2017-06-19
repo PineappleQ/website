@@ -23,9 +23,26 @@ export class UserService extends ServiceBase {
         // registerParams.user.passwordConfirmation = md5(registerParams.user.passwordConfirmation);
         return this.Post(url, registerParams);
     }
-
+    /**
+     * 用户登录
+     * @param loginParams 
+     */
     userLogin(loginParams: LoginParams) {
         let url = "/v1/api/sessions";
         return this.Post(url, loginParams);
+    }
+    /**
+     * 获取下注记录
+     */
+    getUserBets() {
+        let url = "/v1/api/user_bets";
+        return this.Get(url);
+    }
+    /**
+     * 获取用户信息
+     */
+    getUserInfo(userId) {
+        let url = "/v1/api/users/" + userId;
+        return this.Get(url);
     }
 }

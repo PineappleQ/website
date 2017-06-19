@@ -1,3 +1,4 @@
+import { ToastController } from 'ionic-angular';
 import { PlayService } from './../../service/playService';
 import { UserCenterComponent } from './../userCenter/userCenter.component';
 import { TrendComponent } from './../trend/trend.component';
@@ -11,7 +12,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class IndexComponent implements OnInit {
     constructor(
-        private playSvr: PlayService
+        private playSvr: PlayService,
+        private toastCtrl: ToastController
     ) { }
     purchase: any = PurchaseComponent;
     history: any = HistoryComponent;
@@ -20,9 +22,19 @@ export class IndexComponent implements OnInit {
     isMenuOpen: boolean = false;
 
     ngOnInit() {
-        this.playSvr.getPlayTypes().subscribe(data => {
-            console.log(data.json())
-            this.playSvr.setPlayTypesList(data.json().data);
-        });
+        this.playSvr.getPlayTypes().subscribe(
+            data => {
+                console.log(data.json())
+                this.playSvr.setPlayTypesList(data.json().data);
+            },
+            error => {
+                this.playSvr.errorHandler(error, (msg) => {
+                    let toast = this.toastCtrl.create({
+                        message: msg
+                    });
+                    toast.present();
+                }, "获取玩法类型失败")
+            }
+        );
     }
 }

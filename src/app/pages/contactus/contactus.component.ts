@@ -1,5 +1,5 @@
 import { ContentManage } from './../../service/contentmanage';
-import { NavController } from 'ionic-angular';
+import { NavController, AlertController } from 'ionic-angular';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -10,15 +10,26 @@ import { Component, OnInit } from '@angular/core';
 export class ContactUsComponent implements OnInit {
     constructor(
         public navCtrl: NavController,
-        private contentSvr: ContentManage
+        private contentSvr: ContentManage,
+        private alertCtrl: AlertController
     ) { }
 
     contact: any = {}
 
     ngOnInit() {
-        this.contentSvr.getContactUs().subscribe(data => {
-            this.contact = data.json().data;
-        })
+        this.contentSvr.getContactUs().subscribe(
+            data => {
+                this.contact = data.json().data;
+            },
+            error => {
+                this.contentSvr.errorHandler(error, (msg) => {
+                    let alert = this.alertCtrl.create({
+                        message: msg
+                    });
+                    alert.present();
+                }, "获取联系我们信息失败");
+            }
+        )
     }
 
     goBack() {

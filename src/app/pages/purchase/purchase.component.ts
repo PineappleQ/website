@@ -3,7 +3,7 @@ import { PlayService } from './../../service/playService';
 import { SystemActivityComponent } from './../systemactivity/systemactivity.component';
 import { SystemNotifyComponent } from './../systemnotify/systemnotify.component';
 import { IntroComponent } from './../intro/intro.component';
-import { NavController } from 'ionic-angular';
+import { NavController, ToastController } from 'ionic-angular';
 import { Component } from '@angular/core';
 @Component({
     selector: 'purchase',
@@ -13,10 +13,9 @@ import { Component } from '@angular/core';
 export class PurchaseComponent {
     constructor(
         public navCtrl: NavController,
-        private playSvr: PlayService
-    ) {
-        this.getRooms();
-    }
+        private playSvr: PlayService,
+        private toastCtrl: ToastController
+    ) { }
     introPage: any = IntroComponent;
     rooms = [];
     searchRooms = [];
@@ -43,9 +42,18 @@ export class PurchaseComponent {
                 }
             },
             error => {
-                console.log(error);
+                this.playSvr.errorHandler(error, (msg) => {
+                    let toast = this.toastCtrl.create({
+                        message: msg
+                    });
+                    toast.present();
+                }, "获取房间信息失败，请重试");
             }
         )
+    }
+
+    ionViewWillEnter() {
+        this.getRooms();
     }
 
     getInRomm(room) {

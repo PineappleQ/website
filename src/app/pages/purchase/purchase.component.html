@@ -12,22 +12,18 @@
             <div class="row" (click)="getInRomm(room)">
                 <ion-icon class="chat-icon" name="chatbubbles"></ion-icon>
                 <div class="vertical-center" margin-left>
-                    <p>{{room.name}}</p>
-                    <p>{{room.description}}</p>
+                    <p class="room-name">{{room.name}}</p>
+                    <p class="room-description">{{room.description}}</p>
                 </div>
             </div>
         </div>
-        <div ion-item (click)="systemNotify()">
-            <div class="row">
-                <ion-icon name="megaphone"></ion-icon>
-                <span>系统公告</span>
-            </div>
+        <div class="system-item" ion-item (click)="systemNotify()">
+            <ion-icon name="megaphone"></ion-icon>
+            <span>系统公告</span>
         </div>
-        <div ion-item (click)="systemActivity()">
-            <div class="row">
-                <ion-icon name="heart-outline"></ion-icon>
-                <span>系统活动</span>
-            </div>
+        <div class="system-item" ion-item (click)="systemActivity()">
+            <ion-icon name="heart-outline"></ion-icon>
+            <span>系统活动</span>
         </div>
     </ion-list>
 </ion-content>

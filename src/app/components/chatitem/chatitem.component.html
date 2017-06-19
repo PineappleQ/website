@@ -1,8 +1,11 @@
-<div class="msg-container row"  margin-top [ngClass]="{'self-msg': right}">
-    <img class="sender-avatar" src="" alt="">
+<div class="msg-container row" margin-top [ngClass]="{'self-msg': right}">
+    <img class="sender-avatar" src="{{message.sender.url ? message.sender.url : './assets/images/default.jpeg'}}">
 
     <div class="msg-body">
         <span class="sender-nickname">{{message.sender.name}}</span>
-        <div class="msg-content">{{message.content}}</div>
+        <div class="msg-content">
+            <span class="msg-content-detail">{{message.content}}</span>
+            <div class="pop-angle"></div>
+        </div>
     </div>
 </div>

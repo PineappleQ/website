@@ -46,12 +46,13 @@ export class LoginComponent {
                 }
             },
             error => {
-                let errResult = error.json();
-                let alert = this.alertCtrl.create({
-                    message: errResult.message,
+                this.userSvr.errorHandler(error, (msg) => {
+                    let alert = this.alertCtrl.create({
+                        message: msg,
 
-                });
-                alert.present();
+                    });
+                    alert.present();
+                }, "登录失败，请重试");
             }
         );
     }
@@ -65,12 +66,12 @@ export class LoginComponent {
                 }
             },
             error => {
-                let errResult = error.json();
-                let alert = this.alertCtrl.create({
-                    message: errResult.message,
-
-                });
-                alert.present();
+                this.userSvr.errorHandler(error, (msg) => {
+                    let alert = this.alertCtrl.create({
+                        message: msg,
+                    });
+                    alert.present();
+                }, "注册失败，请重试");
             }
         )
     }
@@ -87,13 +88,20 @@ export class LoginComponent {
         this.initLoginParam();
         this.title = "用户登录";
     }
-
+    /**
+     * 获取验证码
+     */
     getCaptcha() {
         this.userSvr.getUserCaptcha().subscribe(
             data => {
                 this.captchaContainer.nativeElement.innerHTML = (<any>data)._body;
             }, error => {
-                console.log(error.json())
+                this.userSvr.errorHandler(error, (msg) => {
+                    let alert = this.alertCtrl.create({
+                        message: msg,
+                    });
+                    alert.present();
+                }, "获取验证码失败");
             });
     }
 

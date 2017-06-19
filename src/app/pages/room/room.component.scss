@@ -1,6 +1,4 @@
-.send-btn{
-    align-self: flex-end;
-}
+
 .room-msg{
     display: -webkit-flex;
     display: flex;
@@ -14,10 +12,21 @@
     background-color: #eee;
 }
 .send-body{
+    display: flex;
+    display: -webkit-flex;
     box-shadow: 0 0 5px #aaa;
+    align-items: center;
+    justify-content: center;
 }
 
 .send-area{
     border: 1px solid #dadada;
     border-radius: 4px;
+    height: 3rem;
+}
+
+.send-btn{
+    height: 3rem;
+    margin: 0;
+    margin-left: 1rem;
 }

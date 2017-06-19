@@ -1,11 +1,11 @@
 import { PlayService } from './../../service/playService';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 @Component({
     selector: 'history',
     templateUrl: './history.component.html',
     styleUrls: ['./history.component.scss']
 })
-export class HistoryComponent implements OnInit {
+export class HistoryComponent {
     constructor(
         private playSvr: PlayService
     ) { }
@@ -13,7 +13,8 @@ export class HistoryComponent implements OnInit {
     playTypes = [];
     histories = [];
     loading: boolean = true;
-    ngOnInit() {
+
+    ionViewWillEnter() {
         this.playTypes = this.playSvr.getPlayTypesList();
         if (this.playTypes && this.playTypes.length) {
             this.playTypes[0].selected = true;

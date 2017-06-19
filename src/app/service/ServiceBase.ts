@@ -45,6 +45,16 @@ export class ServiceBase {
         if (this.CurrentUser) {
             headers.append("authorization", this.CurrentUser.authorization);
         }
-        return this.http.post(url, params, {headers:headers});
+        return this.http.post(url, params, { headers: headers });
+    }
+
+    errorHandler(error, cb, commonMsg) {
+        try {
+            let errorResult = error.json();
+            let msg = errorResult.message ? errorResult.message : commonMsg;
+            cb && cb(msg);
+        } catch (e) {
+            cb && cb("服务器错误");
+        }
     }
 }

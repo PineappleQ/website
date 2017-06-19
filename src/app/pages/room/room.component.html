@@ -7,9 +7,9 @@
         <div padding #chatArea class="chat-area">
             <chat-item [message]="msg" [right]="currentUser.user.id==msg.sender.id" (domLoad)="chatDomLoad($event)" *ngFor="let msg of roomMessages.messages;trackBy:trackFn;"></chat-item>
         </div>
-        <div padding class="row send-body">
-            <ion-textarea class="send-area" rows="3" [(ngModel)]="sendMsgContent"></ion-textarea>
-            <button class="send-btn" ion-button (click)="sendMsg()">发送</button>
+        <div padding class="send-body">
+            <ion-input class="send-area" [(ngModel)]="sendMsgContent"></ion-input>
+            <button ion-button class="send-btn" (click)="sendMsg()">发送</button>
         </div>
     </div>
 </ion-content>
