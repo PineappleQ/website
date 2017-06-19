@@ -44,7 +44,9 @@ export class PurchaseComponent {
             error => {
                 this.playSvr.errorHandler(error, (msg) => {
                     let toast = this.toastCtrl.create({
-                        message: msg
+                        message: msg,
+                        duration: 3000,
+                        position: 'top'
                     });
                     toast.present();
                 }, "获取房间信息失败，请重试");

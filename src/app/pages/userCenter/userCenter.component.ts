@@ -7,7 +7,7 @@ import { CooperationComponent } from './../cooperation/cooperation.component';
 import { PayBackComponent } from './../payback/payback.component';
 import { GameLogComponent } from './../gamelog/gamelog.component';
 import { FeedBackComponent } from './../feedback/feedback.component';
-import { NavController } from 'ionic-angular';
+import { NavController, AlertController } from 'ionic-angular';
 import { Component } from '@angular/core';
 @Component({
     selector: 'user-center',
@@ -17,11 +17,10 @@ import { Component } from '@angular/core';
 export class UserCenterComponent {
     constructor(
         public nav: NavController,
-        private userSvr: UserService
-    ) {
-        this.currentUser = this.userSvr.CurrentUser;
-    }
-    currentUser: User = <any>{}
+        private userSvr: UserService,
+        private alertCtrl: AlertController
+    ) { }
+    currentUser = <any>{}
     userFunctions = [
         {
             id: 'gamelog',
@@ -60,6 +59,10 @@ export class UserCenterComponent {
         }
     ]
 
+    ionViewWillEnter(){
+        this.getUserInfo();
+    }
+
     userFunction(id) {
         let func = this.userFunctions.find((item) => {
             return item.id == id;
@@ -67,5 +70,25 @@ export class UserCenterComponent {
         if (func) {
             this.nav.push(func.component);
         }
+    }
+
+    getUserInfo() {
+        let userId = this.userSvr.CurrentUser.user.id;
+        this.userSvr.getUserInfo(userId).subscribe(
+            data => {
+                let result = data.json();
+                if (!result.error) {
+                    this.currentUser = result.data;
+                }
+            },
+            error => {
+                this.userSvr.errorHandler(error, (msg) => {
+                    let alert = this.alertCtrl.create({
+                        message: msg
+                    });
+                    alert.present();
+                }, "获取用户信息失败");
+            }
+        )
     }
 }

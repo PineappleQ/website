@@ -30,7 +30,9 @@ export class IndexComponent implements OnInit {
             error => {
                 this.playSvr.errorHandler(error, (msg) => {
                     let toast = this.toastCtrl.create({
-                        message: msg
+                        message: msg,
+                        duration: 3000,
+                        position: 'top'
                     });
                     toast.present();
                 }, "获取玩法类型失败")

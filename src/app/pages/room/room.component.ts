@@ -28,7 +28,9 @@ export class RoomComponent implements OnInit, OnDestroy {
         let roomId = this.navParams.get("roomId");
         if (!roomId) {
             let toast = this.toastCtrl.create({
-                message: '加载聊天室失败'
+                message: '加载聊天室失败',
+                duration: 3000,
+                position: 'top'
             });
             toast.present();
             this.navCtrl.pop();
@@ -41,7 +43,9 @@ export class RoomComponent implements OnInit, OnDestroy {
             this.getRoomInfo();
         } else {
             let toast = this.toastCtrl.create({
-                message: '加载聊天室失败'
+                message: '加载聊天室失败',
+                duration: 3000,
+                position: 'top'
             });
             toast.present();
             this.navCtrl.pop();
@@ -91,7 +95,14 @@ export class RoomComponent implements OnInit, OnDestroy {
                 }
             },
             error => {
-                console.log(error);
+                this.playSvr.errorHandler(error, (msg) => {
+                    let toast = this.toastCtrl.create({
+                        message: msg,
+                        duration: 3000,
+                        position: 'top'
+                    });
+                    toast.present()
+                }, "发送消息错误");
             }
         );
         this.sendMsgContent = "";
