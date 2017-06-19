@@ -24,3 +24,8 @@
 .room-description{
     color: #bbb;
 }
+.center-item{
+    display: -webkit-flex;
+    display: flex;
+    align-items: center;
+}

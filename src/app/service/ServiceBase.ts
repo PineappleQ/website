@@ -32,7 +32,7 @@ export class ServiceBase {
         if (this.CurrentUser) {
             header.append("authorization", this.CurrentUser.authorization);
         }
-        return this.http.get(url, { headers: header });
+        return this.http.get(url, { headers: header, withCredentials: true });
     }
 
     Post(url, params) {
@@ -45,7 +45,7 @@ export class ServiceBase {
         if (this.CurrentUser) {
             headers.append("authorization", this.CurrentUser.authorization);
         }
-        return this.http.post(url, params, { headers: headers });
+        return this.http.post(url, params, { headers: headers, withCredentials: true });
     }
 
     errorHandler(error, cb, commonMsg) {

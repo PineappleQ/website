@@ -24,8 +24,10 @@ export class IndexComponent implements OnInit {
     ngOnInit() {
         this.playSvr.getPlayTypes().subscribe(
             data => {
-                console.log(data.json())
-                this.playSvr.setPlayTypesList(data.json().data);
+                let result = data.json();
+                if (!result.error) {
+                    this.playSvr.setPlayTypesList(result.data);
+                }
             },
             error => {
                 this.playSvr.errorHandler(error, (msg) => {

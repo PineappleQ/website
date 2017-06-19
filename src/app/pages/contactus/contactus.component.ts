@@ -19,7 +19,10 @@ export class ContactUsComponent implements OnInit {
     ngOnInit() {
         this.contentSvr.getContactUs().subscribe(
             data => {
-                this.contact = data.json().data;
+                let result = data.json();
+                if (!result.error) {
+                    this.contact = result.data;
+                }
             },
             error => {
                 this.contentSvr.errorHandler(error, (msg) => {

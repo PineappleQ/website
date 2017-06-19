@@ -19,7 +19,10 @@ export class AboutUsComponent implements OnInit {
     ngOnInit() {
         this.contentSvr.getAboutUs().subscribe(
             data => {
-                this.about = data.json().data;
+                let result = data.json();
+                if (!result.error) {
+                    this.about = result.data;
+                }
             },
             error => {
                 this.contentSvr.errorHandler(error, (msg) => {
@@ -27,7 +30,7 @@ export class AboutUsComponent implements OnInit {
                         message: msg
                     });
                     alert.present();
-                }, "获取关于我们信息失败");
+                }, "获取关于我们的信息失败");
             }
         )
     }

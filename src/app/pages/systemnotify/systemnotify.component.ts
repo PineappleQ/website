@@ -1,4 +1,4 @@
-import { NavController } from 'ionic-angular';
+import { NavController, AlertController } from 'ionic-angular';
 import { ContentManage } from './../../service/contentmanage';
 import { Component, OnInit } from '@angular/core';
 
@@ -7,10 +7,11 @@ import { Component, OnInit } from '@angular/core';
     templateUrl: './systemnotify.component.html',
     styleUrls: ['./systemnotify.component.scss']
 })
-export class SystemNotifyComponent implements OnInit{
+export class SystemNotifyComponent implements OnInit {
     constructor(
         private contentSvr: ContentManage,
-        public navCtrl: NavController
+        public navCtrl: NavController,
+        private alertCtrl: AlertController
     ) { }
     header: string = "";
     notifies = [];
@@ -22,10 +23,23 @@ export class SystemNotifyComponent implements OnInit{
      * 获取系统公告
      */
     getNotifies() {
-        this.contentSvr.getSystemNotify().subscribe((data) => {
-            let info = data.json().data;
-            this.notifies.push(info);
-        });
+        this.contentSvr.getSystemNotify().subscribe(
+            data => {
+                let result = data.json();
+                if (!result.error) {
+                    let info = result.data;
+                    this.notifies.push(info);
+                }
+            },
+            error => {
+                this.contentSvr.errorHandler(error, (msg) => {
+                    let alert = this.alertCtrl.create({
+                        message: msg
+                    });
+                    alert.present();
+                }, "获取系统公告失败");
+            }
+        );
     }
 
     back() {

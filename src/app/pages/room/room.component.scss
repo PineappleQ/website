@@ -30,3 +30,45 @@
     margin: 0;
     margin-left: 1rem;
 }
+
+.bet-success{
+    position: fixed;
+    display: none;
+    width: 7rem;
+    height: 7rem;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    font-size: 3rem;
+    color: #00cc99;
+    background-color: #e2e2e2;
+    box-shadow: 0px 0px 5px #aaa;
+    border-radius: 9px;
+    ion-icon{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translateX(-50%) translateY(-50%);
+    }
+}
+
+.bet-failed{
+    position: fixed;
+    display: none;
+    width: 7rem;
+    height: 7rem;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    font-size: 3rem;
+    color: #cc0033;
+    background-color: #e2e2e2;
+    box-shadow: 0px 0px 5px #aaa;
+    border-radius: 9px;
+    ion-icon{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translateX(-50%) translateY(-50%);
+    }
+}

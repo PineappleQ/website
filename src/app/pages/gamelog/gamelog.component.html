@@ -3,20 +3,34 @@
     <span>游戏记录</span>
 </ion-header>
 <ion-content>
-    <ion-list>
-        <ion-item>
-            <p>重庆98</p>
-            <p>
-                <span>下注：800</span>
-                <span float-right>2017-05-22</span>
-            </p>
-        </ion-item>
-        <ion-item>
-            <p>重庆98</p>
-            <p>
-                <span>下注：800</span>
-                <span float-right>2017-05-22</span>
-            </p>
+    <ion-list *ngIf="gameLog.bets && gameLog.bets.length">
+        <ion-item *ngFor="let bet of gameLog.bets">
+            <div class="bet-room bet-item">
+                <span>{{bet.play_room.name}}</span>
+            </div>
+            <div class="bet-content bet-item">
+                <span>下注内容：{{bet.content}}</span>
+            </div>
+            <div class="bet-point bet-item">
+                <span>下注：{{bet.points}}</span>
+                <span class="win" *ngIf="bet.finished && bet.got_points > 0">中彩：+{{bet.got_points}}</span>
+                <span class="not-win" *ngIf="bet.finished && bet.got_points == 0">未中彩</span>
+                <span *ngIf="!bet.finished">未开奖</span>
+            </div>
+            <div class="bet-result bet-item" *ngIf="bet.finished">
+                <span>开奖结果:</span>
+                <span>{{bet.play.result_1}}</span>
+                <span>+</span>
+                <span>{{bet.play.result_2}}</span>
+                <span>+</span>
+                <span>{{bet.play.result_3}}</span>
+                <span>=</span>
+                <span>{{bet.play.result}}</span>
+                <span float-right>{{bet.created_at | date:'yyyy-MM-dd HH:mm'}}</span>
+            </div>
         </ion-item>
     </ion-list>
+    <div text-center margin-top *ngIf="!gameLog.bets || !gameLog.bets.length">
+        没有游戏记录数据
+    </div>
 </ion-content>

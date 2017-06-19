@@ -13,7 +13,7 @@ export class GameLogComponent {
         private alertCtrl: AlertController
     ) { }
 
-    usergameLog = {};
+    gameLog = <any>{};
 
     ionViewWillEnter() {
         this.getGameLog();
@@ -24,7 +24,7 @@ export class GameLogComponent {
             data => {
                 let result = data.json();
                 if (!result.error) {
-                    this.usergameLog = result.data;
+                    this.gameLog = result.data;
                 } else {
                     let msg = result.message ? result.message : "获取游戏记录失败";
                     let alert = this.alertCtrl.create({
@@ -35,11 +35,19 @@ export class GameLogComponent {
             },
             error => {
                 this.userSvr.errorHandler(error, (msg) => {
+                    let that = this;
                     let alert = this.alertCtrl.create({
-                        message: msg
+                        message: msg,
+                        buttons: [
+                            {
+                                text: '确定',
+                                handler: () => {
+                                    that.goBack();
+                                }
+                            }
+                        ]
                     });
                     alert.present();
-                    this.goBack();
                 }, "获取游戏记录失败");
             }
         )

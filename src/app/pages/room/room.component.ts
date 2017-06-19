@@ -13,6 +13,7 @@ export class RoomComponent implements OnInit, OnDestroy {
         public navCtrl: NavController,
         private navParams: NavParams,
         private toastCtrl: ToastController,
+        private alertCtrl: AlertController,
         private playSvr: PlayService
     ) { }
 
@@ -20,9 +21,12 @@ export class RoomComponent implements OnInit, OnDestroy {
     roomMessages: any = [];
     sendMsgContent = "";
     currentUser: User = <any>{};
+    isShowBetSuccess: boolean = false;
     private msgTimer;
     private firstLoad = true;
     @ViewChild("chatArea") chatArea: ElementRef;
+    @ViewChild("betSuccess") betSuccess: ElementRef;
+    @ViewChild("betFailed") betFailed: ElementRef;
     ngOnInit() {
         this.currentUser = this.playSvr.CurrentUser;
         let roomId = this.navParams.get("roomId");
@@ -75,7 +79,22 @@ export class RoomComponent implements OnInit, OnDestroy {
                 }
             },
             error => {
-                console.log(error);
+                this.playSvr.errorHandler(error, (msg) => {
+                    let that = this;
+                    let alert = this.alertCtrl.create({
+                        message: msg,
+                        buttons: [
+                            {
+                                text: '确定',
+                                role: 'cancel',
+                                handler: () => {
+                                    that.goBack();
+                                }
+                            }
+                        ]
+                    });
+                    alert.present();
+                }, "获取聊天室消息失败");
             }
         );
     }
@@ -91,7 +110,11 @@ export class RoomComponent implements OnInit, OnDestroy {
             data => {
                 let result = data.json();
                 if (!result.error) {
-                    console.log("发送成功");
+                    if (result.data.bets && result.data.bets.length) {
+                        this.showBetResult(true);
+                    }
+                } else {
+                    this.showBetResult(false);
                 }
             },
             error => {
@@ -101,11 +124,28 @@ export class RoomComponent implements OnInit, OnDestroy {
                         duration: 3000,
                         position: 'top'
                     });
-                    toast.present()
+                    toast.present();
+                    this.showBetResult(false);
                 }, "发送消息错误");
             }
         );
         this.sendMsgContent = "";
+    }
+
+    showBetResult(isSuccess: boolean) {
+        let success = this.betSuccess.nativeElement;
+        let failed = this.betFailed.nativeElement;
+        if (isSuccess) {
+            success.style.display = "block";
+            failed.style.display = "none";
+        } else {
+            success.style.display = "none";
+            failed.style.display = "block";
+        }
+        setTimeout(() => {
+            success.style.display = "none";
+            failed.style.display = "none";
+        }, 1500);
     }
 
     trackFn(index, msg?) {

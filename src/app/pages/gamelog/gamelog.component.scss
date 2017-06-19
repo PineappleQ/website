@@ -1,0 +1,17 @@
+.bet-item{
+    font-size: 1rem;
+    opacity: 0.6;
+    &:first-child{
+        font-size: 1.7rem;
+        opacity: 1;
+    }
+}
+.win{
+    margin-left: 10px;
+    color: #3EB94E;
+}
+
+.not-win{
+    margin-left: 10px;
+    color: #ff0000;
+}

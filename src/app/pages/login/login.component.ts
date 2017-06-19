@@ -1,6 +1,6 @@
 import { IndexComponent } from './../index/index.component';
 import { UserService } from './../../service/userService';
-import { NavController, AlertController } from 'ionic-angular';
+import { NavController, AlertController, LoadingController } from 'ionic-angular';
 import { LoginParams, RegisterParams } from './../../model/model';
 import { Component, ViewChild, ElementRef } from '@angular/core';
 
@@ -13,7 +13,8 @@ export class LoginComponent {
     constructor(
         public navCtrl: NavController,
         private userSvr: UserService,
-        public alertCtrl: AlertController
+        public alertCtrl: AlertController,
+        private loadingCtrl: LoadingController
     ) { }
     title = "用户登录";
     isLogin: boolean = true;
@@ -37,8 +38,13 @@ export class LoginComponent {
     @ViewChild("captchaContainer") captchaContainer: ElementRef;
 
     onLoginSubmit() {
+        let loader = this.loadingCtrl.create({
+            content: '正在登录'
+        });
+        loader.present();
         this.userSvr.userLogin(this.loginParams).subscribe(
             data => {
+                loader.dismiss();
                 let result = data.json();
                 if (!result.error) {
                     this.userSvr.CurrentUser = result.data;
@@ -46,10 +52,10 @@ export class LoginComponent {
                 }
             },
             error => {
+                loader.dismiss();
                 this.userSvr.errorHandler(error, (msg) => {
                     let alert = this.alertCtrl.create({
                         message: msg,
-
                     });
                     alert.present();
                 }, "登录失败，请重试");
@@ -62,7 +68,27 @@ export class LoginComponent {
             data => {
                 let result = data.json();
                 if (!result.error) {
+                    let that = this;
                     this.userSvr.CurrentUser = result.data;
+                    let alert = this.alertCtrl.create({
+                        message: "注册成功, 是否现在登录?",
+                        buttons: [
+                            {
+                                text: '取消',
+                                role: 'cancel',
+                                handler: () => {
+
+                                }
+                            },
+                            {
+                                text: '确定',
+                                handler: () => {
+                                    that.backToLogin();
+                                }
+                            }
+                        ]
+                    });
+                    alert.present();
                 }
             },
             error => {

@@ -1,3 +1,4 @@
+import { AlertController } from 'ionic-angular';
 import { PlayService } from './../../service/playService';
 import { Component } from '@angular/core';
 @Component({
@@ -7,7 +8,8 @@ import { Component } from '@angular/core';
 })
 export class HistoryComponent {
     constructor(
-        private playSvr: PlayService
+        private playSvr: PlayService,
+        private alertCtrl: AlertController
     ) { }
 
     playTypes = [];
@@ -20,13 +22,26 @@ export class HistoryComponent {
             this.playTypes[0].selected = true;
             this.selectTab(this.playTypes[0]);
         } else {
-            this.playSvr.getPlayTypes().subscribe(data => {
-                this.playTypes = data.json().data;
-                if (this.playTypes && this.playTypes.length) {
-                    this.playTypes[0].selected = true;
-                    this.selectTab(this.playTypes[0]);
+            this.playSvr.getPlayTypes().subscribe(
+                data => {
+                    let result = data.json();
+                    if (!result.error) {
+                        this.playTypes = result.data;
+                        if (this.playTypes && this.playTypes.length) {
+                            this.playTypes[0].selected = true;
+                            this.selectTab(this.playTypes[0]);
+                        }
+                    }
+                },
+                error => {
+                    this.playSvr.errorHandler(error, (msg) => {
+                        let alert = this.alertCtrl.create({
+                            message: msg
+                        });
+                        alert.present();
+                    }, "获取玩法分类失败")
                 }
-            });
+            );
         }
     }
 
@@ -38,10 +53,22 @@ export class HistoryComponent {
             }
         }
         type.selected = true;
-        let today = new Date().getTime() + "";
-        this.playSvr.getPlays(type.id).subscribe(data => {
-            this.histories = data.json().data;
-            this.loading = false;
-        });
+        this.playSvr.getPlays(type.id).subscribe(
+            data => {
+                let result = data.json();
+                if (!result.error) {
+                    this.histories = result.data;
+                }
+                this.loading = false;
+            },
+            error => {
+                this.playSvr.errorHandler(error, (msg) => {
+                    let alert = this.alertCtrl.create({
+                        message: msg
+                    });
+                    alert.present();
+                }, "获取历史开奖记录失败");
+            }
+        );
     }
 }
