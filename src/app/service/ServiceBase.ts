@@ -22,10 +22,16 @@ export class ServiceBase {
         sessionStorage.setItem("user", JSON.stringify(user));
     }
 
-    Get(url) {
+    Get(url, headers?: Headers) {
         url = this.baseUrl + url;
-        let header = new Headers();
+        let header = null;
+        if (headers) {
+            header = headers;
+        } else {
+            header = new Headers();
+        }
         header.append("Content-Type", "application/json");
+        header.append('access-control-expose-headers', 'x-total-count');
         if (this.Token) {
             header.append("token", this.Token);
         }
@@ -35,17 +41,22 @@ export class ServiceBase {
         return this.http.get(url, { headers: header, withCredentials: true });
     }
 
-    Post(url, params) {
+    Post(url, params, headers?: Headers) {
         url = this.baseUrl + url;
-        let headers = new Headers();
-        headers.append("Content-Type", "application/json");
+        let header = null;
+        if (headers) {
+            header = headers;
+        } else {
+            header = new Headers();
+        }
+        header.append("Content-Type", "application/json");
         if (this.Token) {
-            headers.append("token", this.Token);
+            header.append("token", this.Token);
         }
         if (this.CurrentUser) {
-            headers.append("authorization", this.CurrentUser.authorization);
+            header.append("authorization", this.CurrentUser.authorization);
         }
-        return this.http.post(url, params, { headers: headers, withCredentials: true });
+        return this.http.post(url, params, { headers: header, withCredentials: true });
     }
 
     errorHandler(error, cb, commonMsg) {

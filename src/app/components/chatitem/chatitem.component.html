@@ -1,5 +1,5 @@
 <div class="msg-container row" margin-top [ngClass]="{'self-msg': right}">
-    <img class="sender-avatar" src="{{message.sender.url ? message.sender.url : './assets/images/default.jpeg'}}">
+    <img class="sender-avatar" src="{{message.sender.avatar ? message.sender.avatar : './assets/images/default.jpeg'}}" onerror="this.src='./assets/images/default.jpeg';this.onerror=null;">
 
     <div class="msg-body">
         <span class="sender-nickname">{{message.sender.name}}</span>

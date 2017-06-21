@@ -3,7 +3,7 @@
 </ion-header>
 <ion-content>
     <div class="userinfo" padding>
-        <img class="user-avatar" src="./assets/images/default.jpeg" alt="">
+        <img class="user-avatar" src="{{(currentUser.user&&currentUser.user.avatar)?currentUser.user.avatar:'./assets/images/default.jpeg'}}" alt="" onerror="this.src='./assets/images/default.jpeg';this.onerror=null;">
         <div margin-left>
             <p>蛋蛋号：{{currentUser.user?currentUser.user.name:""}}</p>
             <p>剩余积分：{{currentUser.user?currentUser.user.points:""}}</p>

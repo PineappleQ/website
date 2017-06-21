@@ -121,7 +121,12 @@ export class LoginComponent {
         this.userSvr.getUserCaptcha().subscribe(
             data => {
                 this.captchaContainer.nativeElement.innerHTML = (<any>data)._body;
-            }, error => {
+                let token = data.headers.get('token');
+                if (token) {
+                    this.userSvr.setRegistertoken(token);
+                }
+            },
+            error => {
                 this.userSvr.errorHandler(error, (msg) => {
                     let alert = this.alertCtrl.create({
                         message: msg,
