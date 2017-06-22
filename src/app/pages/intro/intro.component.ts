@@ -13,12 +13,27 @@ export class IntroComponent {
     ) { }
     
     detailPage: any = IntroDetailComponent;
-
+    plays = [
+        {
+            id: 'Lucky28',
+            name: '幸运28'
+        },
+        {
+            id: 'Denmark28',
+            name: '丹麦28'
+        },
+        {
+            id: 'Canada28',
+            name: '加拿大28'
+        }
+    ]
     goBack() {
         this.navCtrl.pop();
     }
 
-    goDetailPage() {
-        this.navCtrl.push(this.detailPage)
+    goDetailPage(play) {
+        this.navCtrl.push(this.detailPage, {
+            id: play.id
+        })
     }
 }

@@ -14,12 +14,11 @@ export class ServiceBase {
 
     Token: string = "";
     get CurrentUser(): User {
-        let userStr = sessionStorage.getItem("user");
-        return JSON.parse(userStr);
+        return (<any>window).userInfo;
     }
 
     set CurrentUser(user: User) {
-        sessionStorage.setItem("user", JSON.stringify(user));
+       (<any>window).userInfo = user;
     }
 
     Get(url, headers?: Headers) {

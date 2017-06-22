@@ -1,6 +1,7 @@
 import { ServiceBase } from './ServiceBase';
 import { Injectable } from '@angular/core';
-@Injectable()
+
+
 export class PlayService extends ServiceBase {
     private playTypesList = [];
     private roomList = [];
@@ -64,8 +65,12 @@ export class PlayService extends ServiceBase {
      * 获取聊天室消息
      * @param roomId 
      */
-    getPlayRoomMsg(roomId) {
+    getPlayRoomMsg(roomId, limit: Number = 50, lastTime?: Number) {
         let url = "/v1/api/play_room_messages/" + roomId;
+        // url += "?limit=" + limit;
+        if (lastTime) {
+            url += "?last_time=" + lastTime;
+        }
         return this.Get(url);
     }
 

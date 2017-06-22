@@ -31,7 +31,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule, JsonpModule } from '@angular/http';
 import { IonicModule, IonicApp } from 'ionic-angular';
 import { AppComponent } from './app.component';
-
+import { IonicStorageModule } from '@ionic/storage';
 @NgModule({
   declarations: [
     AppComponent,
@@ -67,13 +67,14 @@ import { AppComponent } from './app.component';
     IonicModule.forRoot(AppComponent, {
       iconMode: 'md',
       tabsHideOnSubPages: true
-    })
+    }),
+    IonicStorageModule.forRoot()
   ],
   providers: [
-    ServiceBase,
     ContentManage,
     PlayService,
-    UserService
+    UserService,
+    ServiceBase
   ],
   entryComponents: [
     IndexComponent,

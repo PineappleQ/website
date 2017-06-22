@@ -72,8 +72,9 @@ export class UserCenterComponent {
         }
     }
 
-    getUserInfo() {
-        let userId = this.userSvr.CurrentUser.user.id;
+    async getUserInfo() {
+        let user:any = this.userSvr.CurrentUser;
+        let userId = user.user.id;
         this.userSvr.getUserInfo(userId).subscribe(
             data => {
                 let result = data.json();

@@ -18,16 +18,18 @@ export class RoomComponent implements OnInit, OnDestroy {
     ) { }
 
     currentRoom: any = {}
-    roomMessages: any = [];
+    roomMessages: any = {};
     sendMsgContent = "";
-    currentUser: User = <any>{};
+    currentUser: any = {};
     isShowBetSuccess: boolean = false;
     private msgTimer;
     private firstLoad = true;
+    private limit = 100;
+    private lastTime: any = 0;
     @ViewChild("chatArea") chatArea: ElementRef;
     @ViewChild("betSuccess") betSuccess: ElementRef;
     @ViewChild("betFailed") betFailed: ElementRef;
-    ngOnInit() {
+    async ngOnInit() {
         this.currentUser = this.playSvr.CurrentUser;
         let roomId = this.navParams.get("roomId");
         if (!roomId) {
@@ -58,11 +60,23 @@ export class RoomComponent implements OnInit, OnDestroy {
     }
 
     getRoomInfo() {
-        this.playSvr.getPlayRoomMsg(this.currentRoom.id).subscribe(
+        let obser = this.playSvr.getPlayRoomMsg(this.currentRoom.id, 50, this.lastTime).subscribe(
             data => {
                 let result = data.json();
                 if (!result.error) {
-                    this.roomMessages = result.data;
+                    if (this.roomMessages.messages) {
+                        this.roomMessages.messages = this.roomMessages.messages.concat(result.data.messages);
+                    } else {
+                        this.roomMessages.messages = result.data.messages;
+                    }
+
+                    if (this.roomMessages.messages.length > this.limit) {
+                        this.roomMessages.messages = this.roomMessages.messages.slice((this.roomMessages.messages.length - this.limit), this.roomMessages.messages.length);
+                    }
+                    if (result.data.last_time) {
+                        this.roomMessages.last_time = result.data.last_time;
+                        this.lastTime = result.data.last_time;
+                    }
                     if (this.roomMessages.messages) {
                         this.roomMessages.messages.sort((a, b) => {
                             let dateA = new Date(a.created_at).getTime();
@@ -74,8 +88,9 @@ export class RoomComponent implements OnInit, OnDestroy {
                         if (this.msgTimer) {
                             clearTimeout(this.msgTimer);
                         }
-                        this.getRoomInfo()
-                    }, 1000);
+                        obser.unsubscribe();
+                        this.getRoomInfo();
+                    }, 5000);
                 }
             },
             error => {

@@ -8,7 +8,7 @@
         <div *ngIf="!loading">
             <div class="list-item-container" text-center *ngFor="let item of histories">
                 <div class="issue list-item">{{item.id}}</div>
-                <div class="date list-item">{{item.created_at | date: 'yyyyMMdd'}}</div>
+                <div class="date list-item">{{item.created_at | date: 'yyyy-MM-dd HH:mm'}}</div>
                 <div *ngIf="item.result" class="result list-item">
                     <span>{{item.result_1}}</span>
                     <span>+</span>
