@@ -28,7 +28,7 @@ export class SystemNotifyComponent implements OnInit {
                 let result = data.json();
                 if (!result.error) {
                     let info = result.data;
-                    this.notifies.push(info);
+                    this.notifies = info;
                 }
             },
             error => {

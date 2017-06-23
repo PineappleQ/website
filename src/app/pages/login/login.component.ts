@@ -47,8 +47,20 @@ export class LoginComponent {
                 loader.dismiss();
                 let result = data.json();
                 if (!result.error) {
-                    this.userSvr.CurrentUser = result.data;
-                    this.loginSuccess();
+                    try {
+                        this.userSvr.CurrentUser = result.data;
+                        this.loginSuccess();
+                    } catch (error) {
+                        let alert = this.alertCtrl.create({
+                            message: '获取用户信息失败，如果当前使用的是IOS设备，请不使用浏览器的无痕浏览模式访问。',
+                            buttons: [
+                                {
+                                    text: '确定'
+                                }
+                            ]
+                        });
+                        alert.present()
+                    }
                 }
             },
             error => {
@@ -69,7 +81,6 @@ export class LoginComponent {
                 let result = data.json();
                 if (!result.error) {
                     let that = this;
-                    this.userSvr.CurrentUser = result.data;
                     let alert = this.alertCtrl.create({
                         message: "注册成功, 是否现在登录?",
                         buttons: [

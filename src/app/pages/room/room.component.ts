@@ -60,23 +60,23 @@ export class RoomComponent implements OnInit, OnDestroy {
     }
 
     getRoomInfo() {
-        let obser = this.playSvr.getPlayRoomMsg(this.currentRoom.id, 50, this.lastTime).subscribe(
+        let obser = this.playSvr.getPlayRoomMsg(this.currentRoom.id, 50).subscribe(
             data => {
                 let result = data.json();
                 if (!result.error) {
-                    if (this.roomMessages.messages) {
-                        this.roomMessages.messages = this.roomMessages.messages.concat(result.data.messages);
-                    } else {
-                        this.roomMessages.messages = result.data.messages;
-                    }
+                    // if (this.roomMessages.messages) {
+                    //     this.roomMessages.messages = this.roomMessages.messages.concat(result.data.messages);
+                    // } else {
+                        this.roomMessages = result.data;
+                    // }
 
-                    if (this.roomMessages.messages.length > this.limit) {
-                        this.roomMessages.messages = this.roomMessages.messages.slice((this.roomMessages.messages.length - this.limit), this.roomMessages.messages.length);
-                    }
-                    if (result.data.last_time) {
-                        this.roomMessages.last_time = result.data.last_time;
-                        this.lastTime = result.data.last_time;
-                    }
+                    // if (this.roomMessages.messages.length > this.limit) {
+                    //     this.roomMessages.messages = this.roomMessages.messages.slice((this.roomMessages.messages.length - this.limit), this.roomMessages.messages.length);
+                    // }
+                    // if (result.data.last_time) {
+                    //     this.roomMessages.last_time = result.data.last_time;
+                    //     this.lastTime = result.data.last_time;
+                    // }
                     if (this.roomMessages.messages) {
                         this.roomMessages.messages.sort((a, b) => {
                             let dateA = new Date(a.created_at).getTime();

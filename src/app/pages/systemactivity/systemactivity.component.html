@@ -3,14 +3,14 @@
     <span>系统活动</span>
 </ion-header>
 <ion-content>
-    <ion-list>
+    <ion-list *ngIf="activities && activities.length">
         <ion-item *ngFor="let activity of activities">
-            <p>{{activity.title}}</p>
+            <p>{{activity.content}}</p>
             <div class="img-container">
                 <img *ngIf="activity.cover_img_url" src="{{activity.cover_img_url}}" alt="">
             </div>
             <div>
-                {{activity.intro}}
+                {{activity.content}}
             </div>
         </ion-item>
     </ion-list>

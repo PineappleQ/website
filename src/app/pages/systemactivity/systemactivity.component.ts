@@ -20,7 +20,7 @@ export class SystemActivityComponent implements OnInit {
             data => {
                 let result = data.json();
                 if (!result.error) {
-                    this.activities.push(result.data);
+                    this.activities = result.data;
                 }
             },
             error => {
