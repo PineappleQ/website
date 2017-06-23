@@ -36,7 +36,8 @@ export class RoomComponent implements OnInit, OnDestroy {
             let toast = this.toastCtrl.create({
                 message: '加载聊天室失败',
                 duration: 3000,
-                position: 'top'
+                position: 'top',
+                cssClass: 'bgred'
             });
             toast.present();
             this.navCtrl.pop();
@@ -51,7 +52,8 @@ export class RoomComponent implements OnInit, OnDestroy {
             let toast = this.toastCtrl.create({
                 message: '加载聊天室失败',
                 duration: 3000,
-                position: 'top'
+                position: 'top',
+                cssClass: 'bgred'
             });
             toast.present();
             this.navCtrl.pop();
@@ -67,7 +69,7 @@ export class RoomComponent implements OnInit, OnDestroy {
                     // if (this.roomMessages.messages) {
                     //     this.roomMessages.messages = this.roomMessages.messages.concat(result.data.messages);
                     // } else {
-                        this.roomMessages = result.data;
+                    this.roomMessages = result.data;
                     // }
 
                     // if (this.roomMessages.messages.length > this.limit) {
@@ -137,7 +139,8 @@ export class RoomComponent implements OnInit, OnDestroy {
                     let toast = this.toastCtrl.create({
                         message: msg,
                         duration: 3000,
-                        position: 'top'
+                        position: 'top',
+                        cssClass: 'bgred'
                     });
                     toast.present();
                     this.showBetResult(false);

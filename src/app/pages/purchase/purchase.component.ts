@@ -46,7 +46,8 @@ export class PurchaseComponent {
                     let toast = this.toastCtrl.create({
                         message: msg,
                         duration: 3000,
-                        position: 'top'
+                        position: 'top',
+                        cssClass: 'bgred'
                     });
                     toast.present();
                 }, "获取房间信息失败，请重试");
