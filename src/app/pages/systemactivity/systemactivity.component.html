@@ -6,9 +6,9 @@
     <ion-list *ngIf="activities && activities.length">
         <ion-item *ngFor="let activity of activities">
             <p>{{activity.content}}</p>
-            <div class="img-container">
+            <!--<div class="img-container">
                 <img *ngIf="activity.cover_img_url" src="{{activity.cover_img_url}}" alt="">
-            </div>
+            </div>-->
             <div>
                 {{activity.content}}
             </div>
