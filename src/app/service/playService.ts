@@ -73,9 +73,21 @@ export class PlayService extends ServiceBase {
         }
         return this.Get(url);
     }
-
+    /**
+     * 发送消息
+     * @param params 
+     */
     sendRoomMsg(params) {
         let url = "/v1/api/play_room_messages/" + params.roomId;
         return this.Post(url, params);
+    }
+    /**
+     * 获取开奖趋势
+     * @param playTypeId 
+     * @param limit 
+     */
+    getTrendData(playTypeId: string, limit: Number = 500) {
+        let url = "/v1/api/play_trends/" + playTypeId + "/" + limit;
+        return this.Get(url);
     }
 }

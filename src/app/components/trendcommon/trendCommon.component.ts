@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 @Component({
     selector: 'trend-common',
     templateUrl: './trendCommon.component.html',
     styleUrls: ['./trendCommon.component.scss']
 })
 export class TrendCommon{
+    @Input() trendData = [];
     items = [
         {
             issue: '2017051',
