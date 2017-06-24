@@ -34,7 +34,8 @@ export class IndexComponent implements OnInit {
                     let toast = this.toastCtrl.create({
                         message: msg,
                         duration: 3000,
-                        position: 'top'
+                        position: 'top',
+                        cssClass: 'bgred'
                     });
                     toast.present();
                 }, "获取玩法类型失败")

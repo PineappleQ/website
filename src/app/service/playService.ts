@@ -66,7 +66,7 @@ export class PlayService extends ServiceBase {
      * @param roomId 
      */
     getPlayRoomMsg(roomId, limit: Number = 50, lastTime?: Number) {
-        let url = "/v1/api/play_room_messages/" + roomId;
+        let url = "/v2/api/play_room_messages/" + roomId;
         // url += "?limit=" + limit;
         if (lastTime) {
             url += "?last_time=" + lastTime;

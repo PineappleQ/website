@@ -1,14 +1,15 @@
-<div class="trend-container">
-
-    <ion-row class="nowrap">
-        <div class="issue">
-            <div class="issue-detail">期号</div>
-            <div class="issue-detail" *ngFor="let item of trendData">
-                <span>{{item.id}}</span>
+<div class="trend-container h100">
+    <ion-row class="nowrap h100">
+        <div class="issue h100">
+            <div class="issue-detail trend-header">期号</div>
+            <div #scrollHead class="scroll-area h100">
+                <div class="issue-detail" *ngFor="let item of trendData">
+                    <span>{{item.id}}</span>
+                </div>
             </div>
         </div>
-        <div class="trend-data">
-            <ion-row class="nowrap">
+        <div class="trend-data h100">
+            <ion-row #scrollBodyHead class="nowrap scroll-body-head trend-header">
                 <div class="trend-detail">值</div>
                 <div class="trend-detail">小</div>
                 <div class="trend-detail">大</div>
@@ -24,50 +25,52 @@
                 <div class="trend-detail">/4</div>
                 <div class="trend-detail">/5</div>
             </ion-row>
-            <ion-row class="nowrap" *ngFor="let item of trendData">
-                <div class="trend-detail">
-                    <span>{{item.num}}</span>
-                </div>
-                <div class="trend-detail">
-                    <span *ngIf="item.x">小</span>
-                </div>
-                <div class="trend-detail">
-                    <span *ngIf="item.d">大</span>
-                </div>
-                <div class="trend-detail">
-                    <span *ngIf="item.odd">单</span>
-                </div>
-                <div class="trend-detail">
-                    <span *ngIf="item.even">双</span>
-                </div>
-                <div class="trend-detail">
-                    <span *ngIf="item.dd">大单</span>
-                </div>
-                <div class="trend-detail">
-                    <span *ngIf="item.ds">大双</span>
-                </div>
-                <div class="trend-detail">
-                    <span *ngIf="item.xd">小单</span>
-                </div>
-                <div class="trend-detail">
-                    <span *ngIf="item.xs">小双</span>
-                </div>
-                <div class="trend-detail">
-                    <span *ngIf="item.jx">极小</span>
-                </div>
-                <div class="trend-detail">
-                    <span *ngIf="item.jd">极大</span>
-                </div>
-                <div class="trend-detail">
-                    <span>{{item.y3}}</span>
-                </div>
-                <div class="trend-detail">
-                    <span>{{item.y4}}</span>
-                </div>
-                <div class="trend-detail">
-                    <span>{{item.y5}}</span>
-                </div>
-            </ion-row>
+            <div #scrollBody class="scroll-area scroll-body">
+                <ion-row class="nowrap" *ngFor="let item of trendData">
+                    <div class="trend-detail">
+                        <span>{{item.num}}</span>
+                    </div>
+                    <div class="trend-detail">
+                        <span class="tag-green" *ngIf="item.x">小</span>
+                    </div>
+                    <div class="trend-detail">
+                        <span class="tag-blue" *ngIf="item.d">大</span>
+                    </div>
+                    <div class="trend-detail">
+                        <span class="tag-green" *ngIf="item.odd">单</span>
+                    </div>
+                    <div class="trend-detail">
+                        <span class="tag-blue" *ngIf="item.even">双</span>
+                    </div>
+                    <div class="trend-detail">
+                        <span class="tag-green" *ngIf="item.dd">大单</span>
+                    </div>
+                    <div class="trend-detail">
+                        <span class="tag-blue" *ngIf="item.ds">大双</span>
+                    </div>
+                    <div class="trend-detail">
+                        <span class="tag-green" *ngIf="item.xd">小单</span>
+                    </div>
+                    <div class="trend-detail">
+                        <span class="tag-blue" *ngIf="item.xs">小双</span>
+                    </div>
+                    <div class="trend-detail">
+                        <span class="tag-green" *ngIf="item.jx">极小</span>
+                    </div>
+                    <div class="trend-detail">
+                        <span class="tag-blue" *ngIf="item.jd">极大</span>
+                    </div>
+                    <div class="trend-detail">
+                        <span>{{item.y3}}</span>
+                    </div>
+                    <div class="trend-detail">
+                        <span>{{item.y4}}</span>
+                    </div>
+                    <div class="trend-detail">
+                        <span>{{item.y5}}</span>
+                    </div>
+                </ion-row>
+            </div>
         </div>
     </ion-row>
 </div>
