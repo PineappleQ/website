@@ -92,7 +92,7 @@ export class RoomComponent implements OnInit, OnDestroy {
                         }
                         obser.unsubscribe();
                         this.getRoomInfo();
-                    }, 5000);
+                    }, 1000);
                 }
             },
             error => {

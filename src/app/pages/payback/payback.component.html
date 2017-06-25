@@ -5,8 +5,8 @@
 </ion-header>
 <ion-content>
     <div class="payback-content" text-center>
-        <img class="QR-code" src="./assets/images/default.jpeg" alt="">
+        <img class="QR-code" [src]="QRCodeSrc|safeUrl" alt="">
         <p margin-top>邀请玩家并参与游戏，你将获得提成</p>
-        <button margin-top ion-button>点击保存二维码</button>
+        <button margin-top ion-button (click)="saveImg()">点击保存二维码</button>
     </div>
 </ion-content>

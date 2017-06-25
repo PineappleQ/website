@@ -1,7 +1,7 @@
 import { RegisterParams, LoginParams } from './../model/model';
 import { ServiceBase } from './ServiceBase';
 import { Injectable } from '@angular/core';
-import { Headers } from '@angular/http';
+import { Headers, ResponseContentType } from '@angular/http';
 // import * as md5 from "md5";
 
 @Injectable()
@@ -57,5 +57,10 @@ export class UserService extends ServiceBase {
     getUserInfo(userId) {
         let url = "/v1/api/users/" + userId;
         return this.Get(url);
+    }
+
+    getQRCode() {
+        let url = "/v1/api/user_qrcode";
+        return this.GetImage(url);
     }
 }

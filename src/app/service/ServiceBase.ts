@@ -1,6 +1,6 @@
 import { User } from './../model/model';
 import { Injectable } from '@angular/core';
-import { Http, Jsonp, Headers } from '@angular/http'
+import { Http, Jsonp, Headers, ResponseContentType } from '@angular/http'
 
 @Injectable()
 export class ServiceBase {
@@ -34,7 +34,6 @@ export class ServiceBase {
             header = new Headers();
         }
         header.append("Content-Type", "application/json");
-        header.append('access-control-expose-headers', 'x-total-count');
         if (this.Token) {
             header.append("token", this.Token);
         }
@@ -42,6 +41,19 @@ export class ServiceBase {
             header.append("authorization", this.CurrentUser.authorization);
         }
         return this.http.get(url, { headers: header, withCredentials: true });
+    }
+
+    GetImage(url) {
+        url = this.baseUrl + url;
+        let headers = new Headers();
+        headers.append("Content-Type", "image/png");
+        if (this.Token) {
+            headers.append("token", this.Token);
+        }
+        if (this.CurrentUser) {
+            headers.append("authorization", this.CurrentUser.authorization);
+        }
+        return this.http.get(url, { headers: headers, withCredentials: true, responseType: ResponseContentType.Blob });
     }
 
     Post(url, params, headers?: Headers) {
