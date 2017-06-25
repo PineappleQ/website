@@ -47,8 +47,24 @@ export class UserService extends ServiceBase {
     /**
      * 获取下注记录
      */
-    getUserBets() {
+    getUserBets(params?: {
+        limit?;
+        lastTime?;
+    }) {
         let url = "/v1/api/user_bets";
+        if (params) {
+            url = url + "?";
+            if (params.lastTime) {
+                url += ("last_time=" + params.lastTime);
+            }
+            if (params.limit) {
+                if (params.lastTime) {
+                    url += ("&limit=" + params.limit);
+                } else {
+                    url += ("limit=" + params.limit);
+                }
+            }
+        }
         return this.Get(url);
     }
     /**
@@ -119,7 +135,7 @@ export class UserService extends ServiceBase {
             if (params.lastTime) {
                 if (params.limit) {
                     url += ("&last_time" + params.lastTime);
-                }else {
+                } else {
                     url += ("last_time" + params.lastTime);
                 }
             }

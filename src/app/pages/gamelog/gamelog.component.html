@@ -3,8 +3,8 @@
     <span>游戏记录</span>
 </ion-header>
 <ion-content>
-    <ion-list *ngIf="gameLog.bets && gameLog.bets.length">
-        <ion-item *ngFor="let bet of gameLog.bets">
+    <ion-list *ngIf="bets && bets.length">
+        <ion-item *ngFor="let bet of bets;">
             <div class="bet-room bet-item">
                 <span>{{bet.play_room.name}}</span>
             </div>
@@ -15,7 +15,8 @@
                 <span>下注：{{bet.points}}</span>
                 <span class="win" *ngIf="bet.finished && bet.got_points > 0">中彩：+{{bet.got_points}}</span>
                 <span class="not-win" *ngIf="bet.finished && bet.got_points == 0">未中彩</span>
-                <span *ngIf="!bet.finished">未开奖</span>
+                <span class="not-finish" *ngIf="!bet.finished">未开奖</span>
+                <span *ngIf="!bet.finished" float-right>{{bet.created_at | date:'yyyy-MM-dd HH:mm'}}</span>
             </div>
             <div class="bet-result bet-item" *ngIf="bet.finished">
                 <span>开奖结果:</span>
@@ -30,6 +31,9 @@
             </div>
         </ion-item>
     </ion-list>
+    <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+        <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
     <div text-center margin-top *ngIf="!gameLog.bets || !gameLog.bets.length">
         没有游戏记录数据
     </div>
