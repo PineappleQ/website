@@ -58,9 +58,72 @@ export class UserService extends ServiceBase {
         let url = "/v1/api/users/" + userId;
         return this.Get(url);
     }
-
+    /**
+     * 获取二维码
+     */
     getQRCode() {
         let url = "/v1/api/user_qrcode";
         return this.GetImage(url);
+    }
+
+    /**
+     * 获得用户流水
+     */
+    getUserJournals(params?: {
+        lastTime;
+        limit;
+    }) {
+        let url = "/v1/api/user_journals";
+        if (params) {
+            url = url + "?";
+            if (params.lastTime) {
+                url += ("last_time=" + params.lastTime);
+            }
+            if (params.limit) {
+                if (params.lastTime) {
+                    url += ("&limit=" + params.limit);
+                } else {
+                    url += ("limit=" + params.limit);
+                }
+            }
+        }
+        return this.Get(url);
+    }
+
+    /**
+     * 意见反馈
+     * @param params 
+     */
+    submitUserFeedback(params: {
+        title;
+        content;
+    }) {
+        let url = "/v1/api/user_feedbacks";
+        return this.Post(url, params);
+    }
+
+    /**
+     * 获得用户返利
+     * @param params 
+     */
+    getUserRebates(params?: {
+        limit?;
+        lastTime?;
+    }) {
+        let url = "/v1/api/user_rebates";
+        if (params) {
+            url = url + "?"
+            if (params.limit) {
+                url += ("limit=" + params.limit);
+            }
+            if (params.lastTime) {
+                if (params.limit) {
+                    url += ("&last_time" + params.lastTime);
+                }else {
+                    url += ("last_time" + params.lastTime);
+                }
+            }
+        }
+        return this.Get(url);
     }
 }

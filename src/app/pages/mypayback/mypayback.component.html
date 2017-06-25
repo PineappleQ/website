@@ -4,9 +4,12 @@
 </ion-header>
 <ion-content>
     <ion-list>
-        <ion-item>
-            <p>玩家：dandan9527</p>
-            <p>贡献：800分</p>
+        <ion-item *ngIf="!rebates || !rebates.length">
+            <p text-center>没有返利数据</p>
+        </ion-item>
+        <ion-item *ngFor="let item of rebates">
+            <p>玩家：{{item.from_user.name}}</p>
+            <p>贡献：{{item.points}}</p>
         </ion-item>
     </ion-list>
 </ion-content>

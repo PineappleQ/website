@@ -5,9 +5,12 @@
 <ion-content>
     <ion-item>
         <ion-label floating>意见标题</ion-label>
-        <ion-input></ion-input>
+        <ion-input [(ngModel)]="feedBackTitle"></ion-input>
     </ion-item>
     <ion-item margin-top>
-        <ion-textarea rows="10" placeholder="请输入你的宝贵意见"></ion-textarea>
+        <ion-textarea [(ngModel)]="feedBackContent" rows="10" placeholder="请输入你的宝贵意见"></ion-textarea>
     </ion-item>
+    <div text-center margin-top>
+        <button class="submit-btn" ion-button (click)="feedBack()">提交</button>
+    </div>
 </ion-content>
