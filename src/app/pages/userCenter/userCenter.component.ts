@@ -21,6 +21,7 @@ export class UserCenterComponent {
         private alertCtrl: AlertController
     ) { }
     currentUser = <any>{}
+    baseUrl = this.userSvr.baseUrl;
     userFunctions = [
         {
             id: 'gamelog',
