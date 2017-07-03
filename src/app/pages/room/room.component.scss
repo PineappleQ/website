@@ -72,3 +72,25 @@
         transform: translateX(-50%) translateY(-50%);
     }
 }
+
+.result-detail{
+    border-bottom: 1px solid #aaa;
+}
+
+.current-play, .last-play{
+    padding: 0.5rem;
+}
+.current-play{
+    border-bottom: 1px solid #ddd;
+}
+.current-play-status{
+    font-weight: 700;
+}
+
+.current-play-id{
+    color: #4F93D9;
+    padding: 0 5px;
+}
+.last-play-id{
+    color: #EC5729;
+}

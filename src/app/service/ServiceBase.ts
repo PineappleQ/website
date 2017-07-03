@@ -10,7 +10,21 @@ export class ServiceBase {
         private jsonp: Jsonp
     ) { }
 
-    baseUrl = "http://dd.cdjump.com";
+    isHttps() {
+        let href = window.location.href;
+        if (href.indexOf("https") > -1) {
+            return true;
+        }
+        return false;
+    }
+
+    get baseUrl() {
+        let isHttps = this.isHttps();
+        if (isHttps) {
+            return "https://dd.cdjump.com";
+        }
+        return "http://dd.cdjump.com";
+    }
 
     Token: string = "";
     get CurrentUser(): User {

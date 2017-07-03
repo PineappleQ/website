@@ -22,6 +22,12 @@ export class RoomComponent implements OnInit, OnDestroy {
     sendMsgContent = "";
     currentUser: any = {};
     isShowBetSuccess: boolean = false;
+    countTimer;
+    resultTimer;
+    resultInfo: {
+        currentPlay;
+        lastPlay;
+    } = <any>{};
     private msgTimer;
     private firstLoad = true;
     private limit = 100;
@@ -48,6 +54,7 @@ export class RoomComponent implements OnInit, OnDestroy {
         if (room) {
             this.currentRoom = room;
             this.getRoomInfo();
+            this.getResultDetail();
         } else {
             let toast = this.toastCtrl.create({
                 message: '加载聊天室失败',
@@ -66,19 +73,7 @@ export class RoomComponent implements OnInit, OnDestroy {
             data => {
                 let result = data.json();
                 if (!result.error) {
-                    // if (this.roomMessages.messages) {
-                    //     this.roomMessages.messages = this.roomMessages.messages.concat(result.data.messages);
-                    // } else {
                     this.roomMessages = result.data;
-                    // }
-
-                    // if (this.roomMessages.messages.length > this.limit) {
-                    //     this.roomMessages.messages = this.roomMessages.messages.slice((this.roomMessages.messages.length - this.limit), this.roomMessages.messages.length);
-                    // }
-                    // if (result.data.last_time) {
-                    //     this.roomMessages.last_time = result.data.last_time;
-                    //     this.lastTime = result.data.last_time;
-                    // }
                     if (this.roomMessages.messages) {
                         this.roomMessages.messages.sort((a, b) => {
                             let dateA = new Date(a.created_at).getTime();
@@ -186,6 +181,73 @@ export class RoomComponent implements OnInit, OnDestroy {
             this.chatArea.nativeElement.scrollTop = this.chatArea.nativeElement.scrollHeight;
         }
     }
+
+    getResultDetail() {
+        this.playSvr.getPlayRooms().subscribe(
+            data => {
+                let result = data.json()
+                if (!result.error) {
+                    let roomData = result.data;
+                    let info = roomData.find(r => {
+                        return r.id == this.currentRoom.id;
+                    });
+                    if (info) {
+                        this.resultInfo.currentPlay = info['current_play'];
+                        this.resultInfo.lastPlay = info['last_finished_play'];
+                        let currentTime = info["current_time"];
+                        let playTime = info['current_play']['created_at'];
+                        let count = new Date(playTime).getTime() - new Date(currentTime).getTime();
+                        this.resultInfo.currentPlay.countDown = count / 1000;
+                        this.getCurrentStatus(this.resultInfo.currentPlay);
+                    }
+                }
+            },
+            error => {
+                this.playSvr.errorHandler(error, (msg) => {
+                    let toast = this.toastCtrl.create({
+                        message: msg,
+                        duration: 3000,
+                        position: 'top',
+                        cssClass: 'bgred'
+                    });
+                    toast.present();
+                }, "获取开奖信息失败");
+            }
+        );
+    }
+
+    getCurrentStatus(currentPlay) {
+        clearInterval(this.resultTimer);
+        if (currentPlay.countDown && currentPlay.countDown > 0) {
+            currentPlay.status = "waiting";
+            this.counting();
+            return;
+        } else if ((!currentPlay.countDown || currentPlay.countDown <= 0) && currentPlay.result == null) {
+            currentPlay.status = "opening";
+        } else {
+            currentPlay.status = "finish";
+        }
+
+        this.resultTimer = setInterval(() => {
+            this.getResultDetail();
+        }, 20000);
+    }
+
+    counting() {
+        if (this.countTimer) {
+            clearTimeout(this.countTimer);
+        }
+        this.countTimer = setTimeout(() => {
+            if (this.resultInfo.currentPlay.countDown && this.resultInfo.currentPlay.countDown > 0) {
+                this.resultInfo.currentPlay.countDown--;
+                this.counting();
+            } else {
+                this.getResultDetail();
+                clearTimeout(this.countTimer);
+            }
+        }, 1000);
+    }
+
     ngOnDestroy() {
         clearTimeout(this.msgTimer);
     }

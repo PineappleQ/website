@@ -1,4 +1,4 @@
-import { SafeUrlPipe } from './pipe/pipe';
+import { SafeUrlPipe, FormatTime } from './pipe/pipe';
 import { ChatItem } from './components/chatitem/chatitem.component';
 import { RoomComponent } from './pages/room/room.component';
 import { LoginComponent } from './pages/login/login.component';
@@ -59,7 +59,8 @@ import { IonicStorageModule } from '@ionic/storage';
     LoginComponent,
     RoomComponent,
     ChatItem,
-    SafeUrlPipe
+    SafeUrlPipe,
+    FormatTime
   ],
   imports: [
     BrowserModule,

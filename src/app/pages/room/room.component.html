@@ -4,6 +4,35 @@
 </ion-header>
 <ion-content>
     <div class="room-msg">
+        <div class="result-info">
+            <div class="result-detail">
+                <div class="current-play row" *ngIf="resultInfo.currentPlay">
+                    <span>距离</span>
+                    <span class="current-play-id">{{resultInfo.currentPlay ? resultInfo.currentPlay.id : ''}}</span>
+                    <span>期截止</span>
+                    <div class="current-play-status" padding-left>
+                        <span *ngIf="resultInfo.currentPlay && resultInfo.currentPlay.status=='waiting'">{{resultInfo.currentPlay.countDown | formatTime}}</span>
+                        <span *ngIf="resultInfo.currentPlay && resultInfo.currentPlay.status=='opening'">封盘中</span>
+                        <span *ngIf="resultInfo.currentPlay && resultInfo.currentPlay.status=='finish'"></span>
+                    </div>
+                </div>
+                <div class="last-play" *ngIf="resultInfo.lastPlay">
+                    <span>第</span>
+                    <span class="last-play-id">{{resultInfo.lastPlay.id}}</span>
+                    <span>期</span>
+                    <span margin-left>{{resultInfo.lastPlay.result_1}}</span>
+                    <span>+</span>
+                    <span>{{resultInfo.lastPlay.result_2}}</span>
+                    <span>+</span>
+                    <span>{{resultInfo.lastPlay.result_3}}</span>
+                    <span>=</span>
+                    <span>{{resultInfo.lastPlay.result}}</span>
+                </div>
+            </div>
+            <div class="last-result">
+
+            </div>
+        </div>
         <div padding #chatArea class="chat-area">
             <chat-item [message]="msg" [right]="currentUser.user.id==msg.sender.id" (domLoad)="chatDomLoad($event)" *ngFor="let msg of roomMessages.messages;trackBy:trackFn;"></chat-item>
         </div>
