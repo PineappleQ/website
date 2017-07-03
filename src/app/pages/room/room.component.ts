@@ -250,5 +250,7 @@ export class RoomComponent implements OnInit, OnDestroy {
 
     ngOnDestroy() {
         clearTimeout(this.msgTimer);
+        clearInterval(this.resultTimer);
+        clearTimeout(this.countTimer);
     }
 }
