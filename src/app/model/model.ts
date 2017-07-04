@@ -10,6 +10,7 @@ export interface RegisterParams {
         password_confirmation: string;//重复密码
     }; //用户账户注册信息
     captcha: string;//注册验证码
+    followed_id?: string;//推荐人id
 }
 /**
  * 用户登录参数

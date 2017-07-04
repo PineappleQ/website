@@ -19,6 +19,7 @@ export class LoginComponent {
     title = "用户登录";
     isLogin: boolean = true;
     captcha: any = {}
+    params;
     loginParams: LoginParams = {
         user: {
             account: "",
@@ -36,6 +37,29 @@ export class LoginComponent {
     }
 
     @ViewChild("captchaContainer") captchaContainer: ElementRef;
+
+    ionViewWillEnter() {
+        let search = window.location.search;
+        if (search) {
+            let paramStr = search.substring(1, search.length);
+            if (paramStr) {
+                this.params = this.buildParams(paramStr);
+            }
+        }
+        if (this.params) {
+            this.isLogin = false;
+        }
+    }
+
+    buildParams(paramStr) {
+        let paramArr = paramStr.split("&&");
+        let paramObj = {};
+        for (let param of paramArr) {
+            let temp = param.split("=");
+            paramObj[temp[0]] = temp[1];
+        }
+        return paramObj;
+    }
 
     onLoginSubmit() {
         let loader = this.loadingCtrl.create({
@@ -76,6 +100,9 @@ export class LoginComponent {
     }
 
     onRegisterSubmit() {
+        if (this.params && this.params.followed_id) {
+            this.registerParams.followed_id = this.params.followed_id;
+        }
         this.userSvr.registerUser(this.registerParams).subscribe(
             data => {
                 let result = data.json();
