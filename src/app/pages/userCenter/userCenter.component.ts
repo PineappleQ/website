@@ -1,3 +1,5 @@
+import { AppComponent } from './../../app.component';
+import { LoginComponent } from './../login/login.component';
 import { ShareComponent } from './../share/share.component';
 import { MyPayBackComponent } from './../mypayback/mypayback.component';
 import { User } from './../../model/model';
@@ -17,7 +19,7 @@ import { Component } from '@angular/core';
 })
 export class UserCenterComponent {
     constructor(
-        public nav: NavController,
+        public navCtrl: NavController,
         private userSvr: UserService,
         private alertCtrl: AlertController
     ) { }
@@ -66,7 +68,7 @@ export class UserCenterComponent {
         }
     ]
 
-    ionViewWillEnter(){
+    ionViewWillEnter() {
         this.getUserInfo();
     }
 
@@ -75,12 +77,12 @@ export class UserCenterComponent {
             return item.id == id;
         });
         if (func) {
-            this.nav.push(func.component);
+            this.navCtrl.push(func.component);
         }
     }
 
     async getUserInfo() {
-        let user:any = this.userSvr.CurrentUser;
+        let user: any = this.userSvr.CurrentUser;
         let userId = user.user.id;
         this.userSvr.getUserInfo(userId).subscribe(
             data => {
@@ -98,5 +100,24 @@ export class UserCenterComponent {
                 }, "获取用户信息失败");
             }
         )
+    }
+    
+    logout() {
+        let alert = this.alertCtrl.create({
+            message: "确认退出登录？",
+            buttons: [
+                {
+                    text: "确定",
+                    handler: () => {
+                        localStorage.removeItem("logindata");
+                        window.location.reload();
+                    }
+                },
+                {
+                    text: "取消"
+                }
+            ]
+        });
+        alert.present();
     }
 }

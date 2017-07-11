@@ -1,0 +1,11 @@
+<ion-header class="header">
+    <ion-icon class="back-btn" name="arrow-back" (click)="goBack()"></ion-icon>
+    <span>分享</span>
+</ion-header>
+<ion-content>
+    <div class="payback-content" text-center>
+        <img class="QR-code" [src]="QRCodeSrc|safeUrl" alt="">
+        <p margin-top>邀请玩家并参与游戏，你将获得提成</p>
+        <button margin-top ion-button (click)="saveImg()">点击保存二维码</button>
+    </div>
+</ion-content>

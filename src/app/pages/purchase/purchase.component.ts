@@ -42,6 +42,8 @@ export class PurchaseComponent {
     getRooms() {
         this.playSvr.getPlayRooms().subscribe(
             data => {
+                clearInterval(this.intervalTimer);
+                clearTimeout(this.timer);
                 let result = data.json();
                 if (!result.error) {
                     this.rooms = result.data;
@@ -51,6 +53,8 @@ export class PurchaseComponent {
                 }
             },
             error => {
+                clearInterval(this.intervalTimer);
+                clearTimeout(this.timer);
                 this.playSvr.errorHandler(error, (msg) => {
                     let toast = this.toastCtrl.create({
                         message: msg,
@@ -76,8 +80,8 @@ export class PurchaseComponent {
         }
         this.startTimer()
     }
-    
-    trackByFn(index, item){
+
+    trackByFn(index, item) {
         return item.id
     }
     startTimer() {
