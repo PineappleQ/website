@@ -8,12 +8,39 @@
         <!--<ion-searchbar placeholder='搜索' [(ngModel)]="keyWord" autocomplete="on" (ionInput)="onInput($event)" (ionClear)="onClear($event)"></ion-searchbar>-->
     </div>
     <ion-list>
-        <div ion-item *ngFor="let room of rooms">
-            <div class="row" (click)="getInRomm(room)">
-                <ion-icon class="chat-icon" name="chatbubbles"></ion-icon>
-                <div class="vertical-center" margin-left>
+        <div ion-item *ngFor="let room of rooms;trackBy:trackByFn">
+            <div class="row room-item" (click)="getInRomm(room)">
+                <ion-icon class="chat-icon noshirnk" name="chatbubbles"></ion-icon>
+                <div class="vertical-center room-info" margin-left>
                     <p class="room-name">{{room.name}}</p>
                     <p class="room-description">{{room.description}}</p>
+                </div>
+                <div class="result-board noshirnk">
+                    <div>
+                        <p>
+                            <span>最新开奖</span>
+                            <span>{{room.last_finished_play?room.last_finished_play.id:" "}}</span>
+                            <span>期</span>
+                        </p>
+                        <p text-center>
+                            <span class="result-tag">{{room.last_finished_play?room.last_finished_play.result_1:" "}}</span>
+                            <span>+</span>
+                            <span class="result-tag">{{room.last_finished_play?room.last_finished_play.result_2:" "}}</span>
+                            <span>+</span>
+                            <span class="result-tag">{{room.last_finished_play?room.last_finished_play.result_3:" "}}</span>
+                            <span>=</span>
+                            <span class="result-tag">{{room.last_finished_play?room.last_finished_play.result:" "}}</span>
+                        </p>
+                    </div>
+                    <div padding-top>
+                        <p>距离下次开奖时间剩余</p>
+                        <p text-center>
+                            <span *ngIf="room.status=='waiting'">{{room.countDown | formatTime}}</span>
+                            <span *ngIf="room.status=='opening'">封盘中</span>
+                            <span *ngIf="room.status=='finish'">&nbsp;</span>
+                            <span>&nbsp;</span>
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>

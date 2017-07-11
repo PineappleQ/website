@@ -73,7 +73,7 @@ export class LoginComponent {
                 if (!result.error) {
                     try {
                         this.userSvr.CurrentUser = result.data;
-                        this.loginSuccess();
+                        this.loginSuccess(this.loginParams.user.account, this.loginParams.user.password);
                     } catch (error) {
                         let alert = this.alertCtrl.create({
                             message: '获取用户信息失败，如果当前使用的是IOS设备，请不使用浏览器的无痕浏览模式访问。',
@@ -174,7 +174,12 @@ export class LoginComponent {
             });
     }
 
-    loginSuccess() {
+    loginSuccess(username, password) {
+        let loginData = {
+            username: username,
+            password: password
+        }
+        localStorage.setItem("logindata", JSON.stringify(loginData));
         this.navCtrl.setRoot(IndexComponent);
     }
 

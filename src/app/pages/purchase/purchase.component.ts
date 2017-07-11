@@ -20,6 +20,13 @@ export class PurchaseComponent {
     rooms = [];
     searchRooms = [];
     keyWord = "";
+    timer;
+    intervalTimer;
+
+    ionViewWillEnter() {
+        this.getRooms();
+    }
+
     goIntro() {
         this.navCtrl.push(this.introPage);
     }
@@ -39,6 +46,8 @@ export class PurchaseComponent {
                 if (!result.error) {
                     this.rooms = result.data;
                     this.playSvr.setRoomList(this.rooms);
+                    this.getCountDown(this.rooms);
+                    this.getNewRoomsInfo();
                 }
             },
             error => {
@@ -55,8 +64,56 @@ export class PurchaseComponent {
         )
     }
 
-    ionViewWillEnter() {
-        this.getRooms();
+    getCountDown(rooms) {
+        if (rooms && rooms.length) {
+            for (let i = 0; i < rooms.length; i++) {
+                let info = rooms[i];
+                let currentTime = info["current_time"];
+                let playTime = info['current_play']['created_at'];
+                let count = new Date(playTime).getTime() - new Date(currentTime).getTime();
+                info.countDown = count / 1000;
+            }
+        }
+        this.startTimer()
+    }
+    
+    trackByFn(index, item){
+        return item.id
+    }
+    startTimer() {
+        let that = this;
+        if (this.timer) {
+            clearTimeout(this.timer);
+        }
+        this.timer = setTimeout(() => {
+            for (let i = 0; i < that.rooms.length; i++) {
+                let room = that.rooms[i];
+                if (room.countDown && room.countDown > 0) {
+                    room.countDown--;
+                }
+                that.getCurrentStatus(room);
+            }
+            that.startTimer();
+        }, 1000);
+    }
+
+    getCurrentStatus(room) {
+        if (room.countDown && room.countDown > 0) {
+            room.status = "waiting";
+            return;
+        } else if ((!room.countDown || room.countDown <= 0) && room.current_play.result == null) {
+            room.status = "opening";
+        } else {
+            room.status = "finish";
+        }
+    }
+
+    getNewRoomsInfo() {
+        let that = this;
+        this.intervalTimer = setInterval(() => {
+            clearTimeout(that.timer);
+            that.getRooms();
+        }, 20000);
     }
 
     getInRomm(room) {
@@ -64,6 +121,12 @@ export class PurchaseComponent {
             roomId: room.id
         })
     }
+
+    ionViewWillLeave() {
+        clearInterval(this.intervalTimer);
+        clearTimeout(this.timer);
+    }
+
 
     // onInput($event) {
     //     if (!this.keyWord) {

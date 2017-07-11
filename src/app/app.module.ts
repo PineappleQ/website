@@ -1,3 +1,4 @@
+import { ShareComponent } from './pages/share/share.component';
 import { SafeUrlPipe, FormatTime } from './pipe/pipe';
 import { ChatItem } from './components/chatitem/chatitem.component';
 import { RoomComponent } from './pages/room/room.component';
@@ -58,6 +59,7 @@ import { IonicStorageModule } from '@ionic/storage';
     AboutUsComponent,
     LoginComponent,
     RoomComponent,
+    ShareComponent,
     ChatItem,
     SafeUrlPipe,
     FormatTime
@@ -100,7 +102,8 @@ import { IonicStorageModule } from '@ionic/storage';
     ContactUsComponent,
     AboutUsComponent,
     LoginComponent,
-    RoomComponent
+    RoomComponent,
+    ShareComponent
   ],
   bootstrap: [IonicApp]
 })

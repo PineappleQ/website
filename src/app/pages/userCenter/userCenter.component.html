@@ -3,7 +3,8 @@
 </ion-header>
 <ion-content>
     <div class="userinfo" padding>
-        <img class="user-avatar" src="{{(currentUser.user&&currentUser.user.avatar)? (baseUrl + currentUser.user.avatar):'./assets/images/default.jpeg'}}" alt="" onerror="this.src='./assets/images/default.jpeg';this.onerror=null;">
+        <img class="user-avatar" src="{{(currentUser.user&&currentUser.user.avatar)? (baseUrl + currentUser.user.avatar):'./assets/images/default.jpeg'}}"
+            alt="" onerror="this.src='./assets/images/default.jpeg';this.onerror=null;">
         <div margin-left>
             <p>蛋蛋号：{{currentUser.user?currentUser.user.name:""}}</p>
             <p>剩余积分：{{(currentUser.user&&currentUser.user.points)?currentUser.user.points:"0"}}</p>
@@ -46,18 +47,12 @@
                 <span margin-left>代理功能</span>
             </div>
         </div>
-    </ion-list>
-    <!--<ion-list class="func-list">
-        <div ion-item>
-            <ion-icon name="paper-plane"></ion-icon>
-            <span>我要分享</span>
+        <div ion-item (click)="userFunction('share')">
+            <div class="center-item">
+                <ion-icon name="paper-plane"></ion-icon>
+                <span margin-left>我要分享</span>
+            </div>
         </div>
-        <div ion-item>
-            <ion-icon name="settings"></ion-icon>
-            <span>设置</span>
-        </div>
-    </ion-list>-->
-    <ion-list class="func-list">
         <div ion-item (click)="userFunction('contactus')">
             <div class="center-item">
                 <ion-icon name="at"></ion-icon>
@@ -65,4 +60,11 @@
             </div>
         </div>
     </ion-list>
+    <!--<ion-list class="func-list">
+        <div ion-item>
+            <ion-icon name="settings"></ion-icon>
+            <span>设置</span>
+        </div>
+    </ion-list>-->
+
 </ion-content>
