@@ -48,6 +48,7 @@ export class LoginComponent {
         }
         if (this.params) {
             this.isLogin = false;
+            this.getCaptcha();
         }
     }
 
