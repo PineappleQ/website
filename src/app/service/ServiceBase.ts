@@ -88,6 +88,42 @@ export class ServiceBase {
         return this.http.post(url, params, { headers: header, withCredentials: true });
     }
 
+    Put(url, params, headers?: Headers) {
+        url = this.baseUrl + url;
+        let header = null;
+        if (headers) {
+            header = headers;
+        } else {
+            header = new Headers();
+        }
+        header.append("Content-Type", "application/json");
+        if (this.Token) {
+            header.append("token", this.Token);
+        }
+        if (this.CurrentUser) {
+            header.append("authorization", this.CurrentUser.authorization);
+        }
+        return this.http.put(url, params, { headers: header, withCredentials: true });
+    }
+
+    Delete(url, headers?: Headers) {
+        url = this.baseUrl + url;
+        let header = null;
+        if (headers) {
+            header = headers;
+        } else {
+            header = new Headers();
+        }
+        header.append("Content-Type", "application/json");
+        if (this.Token) {
+            header.append("token", this.Token);
+        }
+        if (this.CurrentUser) {
+            header.append("authorization", this.CurrentUser.authorization);
+        }
+        return this.http.delete(url, { headers: header, withCredentials: true });
+    }
+
     errorHandler(error, cb, commonMsg) {
         try {
             let errorResult = error.json();

@@ -169,6 +169,7 @@ export class RoomComponent implements OnInit, OnDestroy {
     }
 
     goBack() {
+        this.playSvr.deletePlayer(this.currentRoom.id).subscribe();
         clearTimeout(this.msgTimer);
         this.navCtrl.pop();
     }

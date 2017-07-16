@@ -90,4 +90,26 @@ export class PlayService extends ServiceBase {
         let url = "/v1/api/play_trends/" + playTypeId + "/" + limit;
         return this.Get(url);
     }
+    /**
+     * 进入房间需要调用的接口
+     * @param play_room_id 
+     */
+    createPlayer(play_room_id){
+        if(play_room_id == undefined || play_room_id == null){
+            return;
+        }
+        let url = `/v1/api/play_rooms/${play_room_id}/player`;
+        return this.Put(url, {});
+    }
+    /**
+     * 离开房间需要调用的接口
+     * @param play_room_id 
+     */
+    deletePlayer(play_room_id){
+        if(play_room_id == undefined || play_room_id == null){
+            return;
+        }
+        let url = `/v1/api/play_rooms/${play_room_id}/player`;
+        return this.Delete(url);
+    }
 }

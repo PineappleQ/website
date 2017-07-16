@@ -121,6 +121,7 @@ export class PurchaseComponent {
     }
 
     getInRomm(room) {
+        this.playSvr.createPlayer(room.id).subscribe();
         this.navCtrl.push(RoomComponent, {
             roomId: room.id
         })
