@@ -11,11 +11,7 @@ export class ServiceBase {
     ) { }
 
     isHttps() {
-        let href = window.location.href;
-        if (href.indexOf("https") > -1) {
-            return true;
-        }
-        return false;
+        return true;
     }
 
     get baseUrl() {
