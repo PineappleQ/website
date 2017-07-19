@@ -1,0 +1,96 @@
+
+.room-msg{
+    display: -webkit-flex;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+.chat-area{
+    flex: 1 1 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    background-color: #eee;
+}
+.send-body{
+    display: flex;
+    display: -webkit-flex;
+    box-shadow: 0 0 5px #aaa;
+    align-items: center;
+    justify-content: center;
+}
+
+.send-area{
+    border: 1px solid #dadada;
+    border-radius: 4px;
+    height: 4rem;
+}
+
+.send-btn{
+    height: 3rem;
+    margin: 0;
+    margin-left: 1rem;
+}
+
+.bet-success{
+    position: fixed;
+    display: none;
+    width: 7rem;
+    height: 7rem;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    font-size: 3rem;
+    color: #00cc99;
+    background-color: #e2e2e2;
+    box-shadow: 0px 0px 5px #aaa;
+    border-radius: 9px;
+    ion-icon{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translateX(-50%) translateY(-50%);
+    }
+}
+
+.bet-failed{
+    position: fixed;
+    display: none;
+    width: 7rem;
+    height: 7rem;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    font-size: 3rem;
+    color: #cc0033;
+    background-color: #e2e2e2;
+    box-shadow: 0px 0px 5px #aaa;
+    border-radius: 9px;
+    ion-icon{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translateX(-50%) translateY(-50%);
+    }
+}
+
+.result-detail{
+    border-bottom: 1px solid #aaa;
+}
+
+.current-play, .last-play{
+    padding: 0.5rem;
+}
+.current-play{
+    border-bottom: 1px solid #ddd;
+}
+.current-play-status{
+    font-weight: 700;
+}
+
+.current-play-id{
+    color: #4F93D9;
+    padding: 0 5px;
+}
+.last-play-id{
+    color: #EC5729;
+}

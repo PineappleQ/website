@@ -1,3 +1,5 @@
+import { CustomerService } from './service/customerservice';
+import { OnlineCustomerComponent } from './pages/onlinecustomer/onlinecustomer.component';
 import { ShareComponent } from './pages/share/share.component';
 import { SafeUrlPipe, FormatTime } from './pipe/pipe';
 import { ChatItem } from './components/chatitem/chatitem.component';
@@ -60,6 +62,7 @@ import { IonicStorageModule } from '@ionic/storage';
     LoginComponent,
     RoomComponent,
     ShareComponent,
+    OnlineCustomerComponent,
     ChatItem,
     SafeUrlPipe,
     FormatTime
@@ -79,6 +82,7 @@ import { IonicStorageModule } from '@ionic/storage';
     ContentManage,
     PlayService,
     UserService,
+    CustomerService,
     ServiceBase
   ],
   entryComponents: [
@@ -103,7 +107,8 @@ import { IonicStorageModule } from '@ionic/storage';
     AboutUsComponent,
     LoginComponent,
     RoomComponent,
-    ShareComponent
+    ShareComponent,
+    OnlineCustomerComponent
   ],
   bootstrap: [IonicApp]
 })

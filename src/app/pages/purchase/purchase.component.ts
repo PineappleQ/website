@@ -1,3 +1,4 @@
+import { OnlineCustomerComponent } from './../onlinecustomer/onlinecustomer.component';
 import { RoomComponent } from './../room/room.component';
 import { PlayService } from './../../service/playService';
 import { SystemActivityComponent } from './../systemactivity/systemactivity.component';
@@ -125,6 +126,10 @@ export class PurchaseComponent {
         this.navCtrl.push(RoomComponent, {
             roomId: room.id
         })
+    }
+
+    onlineCustomer() {
+        this.navCtrl.push(OnlineCustomerComponent);
     }
 
     ionViewWillLeave() {
