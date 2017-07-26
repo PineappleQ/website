@@ -32,6 +32,7 @@ export class RoomComponent implements OnInit, OnDestroy {
     private firstLoad = true;
     private limit = 100;
     private lastTime: any = 0;
+    private obser;
     @ViewChild("chatArea") chatArea: ElementRef;
     @ViewChild("betSuccess") betSuccess: ElementRef;
     @ViewChild("betFailed") betFailed: ElementRef;
@@ -68,12 +69,13 @@ export class RoomComponent implements OnInit, OnDestroy {
         }
     }
 
-    getRoomInfo() {
-        let obser = this.playSvr.getPlayRoomMsg(this.currentRoom.id, 50).subscribe(
+    getRoomInfo(lastTime?) {
+        this.obser = this.playSvr.getPlayRoomMsg(this.currentRoom.id, 50, lastTime).subscribe(
             data => {
                 let result = data.json();
                 if (!result.error) {
                     this.roomMessages = result.data;
+                    this.lastTime = result.data.last_time;
                     if (this.roomMessages.messages) {
                         this.roomMessages.messages.sort((a, b) => {
                             let dateA = new Date(a.created_at).getTime();
@@ -81,13 +83,10 @@ export class RoomComponent implements OnInit, OnDestroy {
                             return dateA - dateB;
                         });
                     }
-                    this.msgTimer = setTimeout(() => {
-                        if (this.msgTimer) {
-                            clearTimeout(this.msgTimer);
-                        }
-                        obser.unsubscribe();
-                        this.getRoomInfo();
-                    }, 1000);
+                    if (this.obser) {
+                        this.obser.unsubscribe();
+                    }
+                    this.getRoomInfo(this.lastTime);
                 }
             },
             error => {
@@ -250,6 +249,9 @@ export class RoomComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
+        if (this.obser) {
+            this.obser.unsubscribe();
+        }
         clearTimeout(this.msgTimer);
         clearInterval(this.resultTimer);
         clearTimeout(this.countTimer);

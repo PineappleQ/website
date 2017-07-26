@@ -94,8 +94,8 @@ export class PlayService extends ServiceBase {
      * 进入房间需要调用的接口
      * @param play_room_id 
      */
-    createPlayer(play_room_id){
-        if(play_room_id == undefined || play_room_id == null){
+    createPlayer(play_room_id) {
+        if (play_room_id == undefined || play_room_id == null) {
             return;
         }
         let url = `/v1/api/play_rooms/${play_room_id}/player`;
@@ -105,11 +105,43 @@ export class PlayService extends ServiceBase {
      * 离开房间需要调用的接口
      * @param play_room_id 
      */
-    deletePlayer(play_room_id){
-        if(play_room_id == undefined || play_room_id == null){
+    deletePlayer(play_room_id) {
+        if (play_room_id == undefined || play_room_id == null) {
             return;
         }
         let url = `/v1/api/play_rooms/${play_room_id}/player`;
         return this.Delete(url);
+    }
+
+    /**
+     * 房间内上分
+     * @param play_room_id 
+     * @param points 
+     */
+    incrementPoints(play_room_id, points) {
+        if (play_room_id == undefined || play_room_id == null) {
+            return;
+        }
+        let url = `v1/api/play_rooms/${play_room_id}/points`;
+        let params = {
+            points: points
+        }
+        return this.Post(url, params);
+    }
+
+    /**
+     * 下分
+     * @param play_room_id 
+     * @param points 
+     */
+    decrementPoints(play_room_id, points) {
+        if (play_room_id == undefined || play_room_id == null) {
+            return;
+        }
+        let url = `v1/api/play_rooms/${play_room_id}/points`;
+        let params = {
+            points: points
+        }
+        //TODO delete 携带requestBody?
     }
 }
