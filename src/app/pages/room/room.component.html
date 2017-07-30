@@ -1,6 +1,7 @@
 <ion-header>
     <ion-icon class="back-btn" (click)="goBack()" name="arrow-back"></ion-icon>
     <span>{{currentRoom.name}}</span>
+    <ion-icon class="pop-btn" name="more" (click)="actionSheets($event)"></ion-icon>
 </ion-header>
 <ion-content>
     <div class="room-msg">
@@ -34,7 +35,7 @@
             </div>
         </div>
         <div padding #chatArea class="chat-area">
-            <chat-item [message]="msg" [right]="currentUser.user.id==msg.sender.id" (domLoad)="chatDomLoad($event)" *ngFor="let msg of roomMessages.messages;trackBy:trackFn;"></chat-item>
+            <chat-item [message]="msg" [right]="currentUser.user.id==msg.sender_id" (domLoad)="chatDomLoad($event)" *ngFor="let msg of roomMessages.messages;trackBy:trackFn;"></chat-item>
         </div>
         <div padding class="send-body">
             <ion-input class="send-area" [(ngModel)]="sendMsgContent"></ion-input>

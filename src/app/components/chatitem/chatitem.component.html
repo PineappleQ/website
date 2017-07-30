@@ -1,8 +1,8 @@
 <div class="msg-container row" margin-top [ngClass]="{'self-msg': right}">
-    <img class="sender-avatar" src="{{message.sender.avatar ? (baseUrl + message.sender.avatar) : './assets/images/default.jpeg'}}" onerror="this.src='./assets/images/default.jpeg';this.onerror=null;">
+    <img class="sender-avatar" src="{{(message.sender&&message.sender.avatar) ? (baseUrl + message.sender.avatar) : './assets/images/default.jpeg'}}" onerror="this.src='./assets/images/default.jpeg';this.onerror=null;">
 
     <div class="msg-body">
-        <span class="sender-nickname">{{message.sender.name}}</span>
+        <span class="sender-nickname">{{message.sender && message.sender.name}}</span>
         <div class="msg-content">
             <span class="msg-content-detail">{{message.content}}</span>
             <div class="pop-angle"></div>

@@ -1,6 +1,8 @@
+import { DecrementPointsComponent } from './more/decrementpoints.component';
+import { IncrementPointsComponent } from './more/incrementpoints.component';
 import { User } from './../../model/model';
 import { PlayService } from './../../service/playService';
-import { NavController, NavParams, AlertController, ToastController } from 'ionic-angular';
+import { NavController, NavParams, AlertController, ToastController, ActionSheetController, PopoverController } from 'ionic-angular';
 import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
 
 @Component({
@@ -14,7 +16,9 @@ export class RoomComponent implements OnInit, OnDestroy {
         private navParams: NavParams,
         private toastCtrl: ToastController,
         private alertCtrl: AlertController,
-        private playSvr: PlayService
+        private playSvr: PlayService,
+        private actionSheetCtrl: ActionSheetController,
+        private popoverCtrl: PopoverController
     ) { }
 
     currentRoom: any = {}
@@ -24,6 +28,7 @@ export class RoomComponent implements OnInit, OnDestroy {
     isShowBetSuccess: boolean = false;
     countTimer;
     resultTimer;
+    msgLengthLimit = 100;
     resultInfo: {
         currentPlay;
         lastPlay;
@@ -74,7 +79,24 @@ export class RoomComponent implements OnInit, OnDestroy {
             data => {
                 let result = data.json();
                 if (!result.error) {
-                    this.roomMessages = result.data;
+                    if (this.roomMessages && this.roomMessages.messages) {
+                        let msgs = this.roomMessages.messages.concat(result.data.messages);
+                        this.roomMessages.messages = [];
+                        for (let msg of msgs) {
+                            if (!this.roomMessages.messages.length) {
+                                this.roomMessages.messages.push(msg);
+                            } else {
+                                let target = this.roomMessages.messages.find(roomMsg => {
+                                    return roomMsg.id == msg.id;
+                                });
+                                if (!target) {
+                                    this.roomMessages.messages.push(msg);
+                                }
+                            }
+                        }
+                    } else {
+                        this.roomMessages = result.data;
+                    }
                     this.lastTime = result.data.last_time;
                     if (this.roomMessages.messages) {
                         this.roomMessages.messages.sort((a, b) => {
@@ -82,6 +104,11 @@ export class RoomComponent implements OnInit, OnDestroy {
                             let dateB = new Date(b.created_at).getTime();
                             return dateA - dateB;
                         });
+                        if (this.roomMessages.messages.length > this.msgLengthLimit) {
+                            let allLength = this.roomMessages.messages.length
+                            let difference = allLength - this.msgLengthLimit;
+                            this.roomMessages.messages = this.roomMessages.messages.splice(difference, this.msgLengthLimit);
+                        }
                     }
                     if (this.obser) {
                         this.obser.unsubscribe();
@@ -142,6 +169,84 @@ export class RoomComponent implements OnInit, OnDestroy {
             }
         );
         this.sendMsgContent = "";
+    }
+
+    actionSheets(event) {
+        let actionSheet = this.actionSheetCtrl.create({
+            buttons: [
+                {
+                    text: '上分',
+                    handler: () => {
+                        let popoverIncrement = this.popoverCtrl.create(IncrementPointsComponent);
+                        popoverIncrement.present();
+                        popoverIncrement.onDidDismiss((data) => {
+                            let point = Number(data);
+                            if (point || point == 0) {
+                                this.playSvr.incrementPoints(this.currentRoom.id, point).subscribe(
+                                    data => {
+                                        let result = data.json();
+                                        if (!result.error) {
+                                            this.showToast("上分成功");
+                                        }
+                                    },
+                                    error => {
+                                        this.showToast("上分失败，请重试", true);
+                                    }
+                                );
+                            } else {
+                                this.showToast("输入的数值有误", true);
+                            }
+                        })
+                    }
+                },
+                {
+                    text: "下分",
+                    handler: () => {
+                        let popoverDecrement = this.popoverCtrl.create(DecrementPointsComponent);
+                        popoverDecrement.present();
+                        popoverDecrement.onDidDismiss((data) => {
+                            let point = Number(data);
+                            if (point || point == 0) {
+                                this.playSvr.decrementPoints(this.currentRoom.id, point).subscribe(
+                                    data => {
+                                        let result = data.json();
+                                        if (!result.error) {
+                                            this.showToast("下分成功");
+                                        }
+                                    },
+                                    errr => {
+                                        this.showToast("下分失败，请重试", true);
+                                    }
+                                )
+                            } else {
+                                this.showToast("输入的数值有误", true);
+                            }
+                        })
+                    }
+                }
+            ]
+        });
+        actionSheet.present();
+    }
+
+    showAlert(msg) {
+        let alert = this.alertCtrl.create({
+            message: msg
+        });
+        alert.present();
+    }
+
+    showToast(msg, isError?: boolean) {
+        let msgBody: any = {
+            message: msg,
+            duration: 3000,
+            position: 'top'
+        }
+        if (isError) {
+            msgBody.cssClass = 'bgred'
+        }
+        let toast = this.toastCtrl.create(msgBody);
+        toast.present();
     }
 
     showBetResult(isSuccess: boolean) {

@@ -1,3 +1,4 @@
+import { RequestOptions } from '@angular/http';
 import { ServiceBase } from './ServiceBase';
 import { Injectable } from '@angular/core';
 
@@ -122,7 +123,7 @@ export class PlayService extends ServiceBase {
         if (play_room_id == undefined || play_room_id == null) {
             return;
         }
-        let url = `v1/api/play_rooms/${play_room_id}/points`;
+        let url = `/v1/api/play_rooms/${play_room_id}/points`;
         let params = {
             points: points
         }
@@ -138,10 +139,12 @@ export class PlayService extends ServiceBase {
         if (play_room_id == undefined || play_room_id == null) {
             return;
         }
-        let url = `v1/api/play_rooms/${play_room_id}/points`;
-        let params = {
-            points: points
-        }
-        //TODO delete 携带requestBody?
+        let url = `/v1/api/play_rooms/${play_room_id}/points`;
+        let options = new RequestOptions({
+            body: {
+                points: points
+            }
+        })
+        return this.Delete(url, options);
     }
 }

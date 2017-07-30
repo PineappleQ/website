@@ -1,6 +1,6 @@
 import { User } from './../model/model';
 import { Injectable } from '@angular/core';
-import { Http, Jsonp, Headers, ResponseContentType } from '@angular/http'
+import { Http, Jsonp, Headers, ResponseContentType, RequestOptions } from '@angular/http'
 
 @Injectable()
 export class ServiceBase {
@@ -102,11 +102,11 @@ export class ServiceBase {
         return this.http.put(url, params, { headers: header, withCredentials: true });
     }
 
-    Delete(url, headers?: Headers) {
+    Delete(url, requestOptions?: RequestOptions) {
         url = this.baseUrl + url;
         let header = null;
-        if (headers) {
-            header = headers;
+        if (requestOptions && requestOptions.headers) {
+            header = requestOptions.headers;
         } else {
             header = new Headers();
         }

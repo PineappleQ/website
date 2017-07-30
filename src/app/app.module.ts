@@ -1,3 +1,5 @@
+import { DecrementPointsComponent } from './pages/room/more/decrementpoints.component';
+import { IncrementPointsComponent } from './pages/room/more/incrementpoints.component';
 import { CustomerService } from './service/customerservice';
 import { OnlineCustomerComponent } from './pages/onlinecustomer/onlinecustomer.component';
 import { ShareComponent } from './pages/share/share.component';
@@ -63,6 +65,8 @@ import { IonicStorageModule } from '@ionic/storage';
     RoomComponent,
     ShareComponent,
     OnlineCustomerComponent,
+    IncrementPointsComponent,
+    DecrementPointsComponent,
     ChatItem,
     SafeUrlPipe,
     FormatTime
@@ -108,7 +112,9 @@ import { IonicStorageModule } from '@ionic/storage';
     LoginComponent,
     RoomComponent,
     ShareComponent,
-    OnlineCustomerComponent
+    OnlineCustomerComponent,
+    IncrementPointsComponent,
+    DecrementPointsComponent
   ],
   bootstrap: [IonicApp]
 })
