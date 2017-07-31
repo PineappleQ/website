@@ -140,11 +140,9 @@ export class PlayService extends ServiceBase {
             return;
         }
         let url = `/v1/api/play_rooms/${play_room_id}/points`;
-        let options = new RequestOptions({
-            body: {
-                points: points
-            }
-        })
-        return this.Delete(url, options);
+        let body = {
+            points: points
+        }
+        return this.Delete(url, null, body);
     }
 }

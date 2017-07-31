@@ -212,6 +212,8 @@ export class RoomComponent implements OnInit, OnDestroy {
                                         let result = data.json();
                                         if (!result.error) {
                                             this.showToast("下分成功");
+                                        } else {
+                                            this.showToast(result.message, true);
                                         }
                                     },
                                     errr => {
