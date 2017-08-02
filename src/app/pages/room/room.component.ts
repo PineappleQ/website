@@ -97,13 +97,14 @@ export class RoomComponent implements OnInit, OnDestroy {
                     } else {
                         this.roomMessages = result.data;
                     }
+                    console.log(this.roomMessages.messages)
                     this.lastTime = result.data.last_time;
                     if (this.roomMessages.messages) {
-                        this.roomMessages.messages.sort((a, b) => {
-                            let dateA = new Date(a.created_at).getTime();
-                            let dateB = new Date(b.created_at).getTime();
-                            return dateA - dateB;
-                        });
+                        // this.roomMessages.messages.sort((a, b) => {
+                        //     let dateA = new Date(a.created_at).getTime();
+                        //     let dateB = new Date(b.created_at).getTime();
+                        //     return dateA - dateB;
+                        // });
                         if (this.roomMessages.messages.length > this.msgLengthLimit) {
                             let allLength = this.roomMessages.messages.length
                             let difference = allLength - this.msgLengthLimit;
