@@ -97,7 +97,6 @@ export class RoomComponent implements OnInit, OnDestroy {
                     } else {
                         this.roomMessages = result.data;
                     }
-                    console.log(this.roomMessages.messages)
                     this.lastTime = result.data.last_time;
                     if (this.roomMessages.messages) {
                         // this.roomMessages.messages.sort((a, b) => {

@@ -36,13 +36,6 @@ export class OnlineCustomerComponent {
                 if (!result.error) {
                     this.roomMessages = result.data;
                     this.lastTime = result.data.last_time;
-                    if (this.roomMessages.messages) {
-                        this.roomMessages.messages.sort((a, b) => {
-                            let dateA = new Date(a.created_at).getTime();
-                            let dateB = new Date(b.created_at).getTime();
-                            return dateA - dateB;
-                        });
-                    }
                     if (this.obser) {
                         this.obser.unsubscribe();
                     }
