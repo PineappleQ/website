@@ -17,22 +17,25 @@ export class OnlineCustomerComponent {
 
     roomMessages: any = {};
     currentUser: any = {};
-    timer;
     sendMsgContent = "";
+    lastTime;
+    limit = 50;
+    obser;
     @ViewChild("chatArea") chatArea: ElementRef;
 
     ionViewWillEnter() {
         this.currentUser = this.customerSvr.CurrentUser;
-        this.getMessage();
+        this.getMessage(this.limit);
     }
 
-    getMessage() {
+    getMessage(limit, lastTime?) {
         let that = this;
-        let obser = this.customerSvr.getMessage().subscribe(
+        this.obser = this.customerSvr.getMessage(this.limit, this.lastTime).subscribe(
             data => {
                 let result = data.json();
                 if (!result.error) {
                     this.roomMessages = result.data;
+                    this.lastTime = result.data.last_time;
                     if (this.roomMessages.messages) {
                         this.roomMessages.messages.sort((a, b) => {
                             let dateA = new Date(a.created_at).getTime();
@@ -40,20 +43,21 @@ export class OnlineCustomerComponent {
                             return dateA - dateB;
                         });
                     }
-                    this.timer = setTimeout(() => {
-                        if (this.timer) {
-                            clearTimeout(this.timer);
-                        }
-                        obser.unsubscribe();
-                        this.getMessage();
-                    }, 1000);
+                    if (this.obser) {
+                        this.obser.unsubscribe();
+                    }
+                    this.getMessage(this.limit, this.lastTime);
                 } else {
-                    clearTimeout(this.timer);
+                    if (this.obser) {
+                        this.obser.unsubscribe();
+                    }
                     this.handleErrorAlert(result.message, "获取消息信息失败");
                 }
             },
             error => {
-                clearTimeout(this.timer);
+                if (this.obser) {
+                    this.obser.unsubscribe();
+                }
                 this.handleErrorAlert(error, "获取消息信息失败");
             }
         )
@@ -130,11 +134,18 @@ export class OnlineCustomerComponent {
     }
 
     ionViewWillLeave() {
-        clearTimeout(this.timer);
+        if (this.obser) {
+            this.obser.unsubscribe();
+        }
+        if (this.obser) {
+            this.obser.unsubscribe();
+        }
     }
 
     goBack() {
-        clearTimeout(this.timer);
+        if (this.obser) {
+            this.obser.unsubscribe();
+        }
         this.navCtrl.pop();
     }
 }
