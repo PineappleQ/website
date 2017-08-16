@@ -5,13 +5,11 @@
 <ion-content>
     <ion-list *ngIf="activities && activities.length">
         <ion-item *ngFor="let activity of activities">
-            <p>{{activity.title}}</p>
+            <p class="activity-title" [innerHtml]="activity.title"></p>
             <!--<div class="img-container">
                 <img *ngIf="activity.cover_img_url" src="{{activity.cover_img_url}}" alt="">
             </div>-->
-            <div>
-                {{activity.content}}
-            </div>
+            <div class="activity-content" [innerHtml]="activity.content"></div>
         </ion-item>
     </ion-list>
 </ion-content>

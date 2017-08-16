@@ -14,7 +14,7 @@
                     <div class="current-play-status" padding-left>
                         <span *ngIf="resultInfo.currentPlay && resultInfo.currentPlay.status=='waiting'">{{resultInfo.currentPlay.countDown | formatTime}}</span>
                         <span *ngIf="resultInfo.currentPlay && resultInfo.currentPlay.status=='opening'">封盘中</span>
-                        <span *ngIf="resultInfo.currentPlay && resultInfo.currentPlay.status=='finish'"></span>
+                        <span *ngIf="resultInfo.currentPlay && resultInfo.currentPlay.status=='finish'">开奖中</span>
                     </div>
                 </div>
                 <div class="last-play" *ngIf="resultInfo.lastPlay">

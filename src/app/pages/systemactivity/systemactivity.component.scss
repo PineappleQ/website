@@ -9,3 +9,20 @@
         max-height: 100%;
     }
 }
+.activity-title{
+    font-size: 2rem;
+    color: #000;
+    text-align: center;
+    white-space: pre-wrap;
+    font-family: 'microsoft yahei'
+}
+.activity-content{
+    white-space: pre-wrap;
+    font-family: 'microsoft yahei';
+    overflow: inherit;
+    font-size: 1.4rem;
+    line-height: normal;
+    text-overflow: inherit;
+    color: #8e9093;
+    margin: 0 0 2px;
+}

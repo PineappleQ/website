@@ -37,7 +37,7 @@
                         <p text-center>
                             <span *ngIf="room.status=='waiting'">{{room.countDown | formatTime}}</span>
                             <span *ngIf="room.status=='opening'">封盘中</span>
-                            <span *ngIf="room.status=='finish'">&nbsp;</span>
+                            <span *ngIf="room.status=='finish'">开奖中</span>
                             <span>&nbsp;</span>
                         </p>
                     </div>

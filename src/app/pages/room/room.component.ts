@@ -302,9 +302,13 @@ export class RoomComponent implements OnInit, OnDestroy {
                         this.resultInfo.currentPlay = info['current_play'];
                         this.resultInfo.lastPlay = info['last_finished_play'];
                         let currentTime = info["current_time"];
-                        let playTime = info['current_play']['created_at'];
-                        let count = new Date(playTime).getTime() - new Date(currentTime).getTime();
-                        this.resultInfo.currentPlay.countDown = count / 1000;
+                        let openTime = info['current_play']['created_at'];
+                        let closeTime = info['closed_at'];
+                        let count = new Date(closeTime).getTime() - new Date(currentTime).getTime();
+                        this.resultInfo.currentPlay.countDown = count / 1000;//倒计时
+                        this.resultInfo.currentPlay.currentTime = new Date(currentTime).getTime();//当前时间
+                        this.resultInfo.currentPlay.openTime = new Date(openTime).getTime();//开奖时间
+                        this.resultInfo.currentPlay.closeTime = new Date(closeTime).getTime();//封盘时间
                         this.getCurrentStatus(this.resultInfo.currentPlay);
                     }
                 }
@@ -325,13 +329,13 @@ export class RoomComponent implements OnInit, OnDestroy {
 
     getCurrentStatus(currentPlay) {
         clearInterval(this.resultTimer);
-        if (currentPlay.countDown && currentPlay.countDown > 0) {
+        if (currentPlay.countDown && currentPlay.countDown > 0) {//倒计时
             currentPlay.status = "waiting";
             this.counting();
             return;
-        } else if ((!currentPlay.countDown || currentPlay.countDown <= 0) && currentPlay.result == null) {
+        } else if ((!currentPlay.countDown || currentPlay.countDown <= 0) && (currentPlay.openTime - currentPlay.currentTime) > 0) {//封盘中
             currentPlay.status = "opening";
-        } else {
+        } else if((!currentPlay.countDown || currentPlay.countDown <= 0) && (currentPlay.openTime - currentPlay.currentTime) <= 0){//开奖中
             currentPlay.status = "finish";
         }
 

@@ -5,13 +5,11 @@
 <ion-content>
     <ion-list>
         <ion-item *ngFor="let notify of notifies">
-            <p>{{notify.title}}</p>
+            <p class="notify-title" [innerHtml]="notify.title"></p>
             <!--<div class="img-container">
                 <img *ngIf="notify.cover_img_url" src="{{notify.cover_img_url}}" alt="">
             </div>-->
-            <div>
-                {{notify.content}}
-            </div>
+            <div class="notify-content" [innerHtml]="notify.content"></div>
         </ion-item>
     </ion-list>
 </ion-content>

@@ -3,5 +3,6 @@
      <span>联系我们</span>
 </ion-header>
 <ion-content padding>
-    <p>{{contact.intro}}</p>
+    <p class="contact-title" [innerHtml]="contact.title"></p>
+    <div class="contact-content" [innerHtml]="contact.content"></div>
 </ion-content>

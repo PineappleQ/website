@@ -74,9 +74,13 @@ export class PurchaseComponent {
             for (let i = 0; i < rooms.length; i++) {
                 let info = rooms[i];
                 let currentTime = info["current_time"];
-                let playTime = info['current_play']['created_at'];
-                let count = new Date(playTime).getTime() - new Date(currentTime).getTime();
+                let openTime = info['current_play']['created_at'];
+                let closeTime = info['closed_at'];
+                let count = new Date(closeTime).getTime() - new Date(currentTime).getTime();
                 info.countDown = count / 1000;
+                info.currentTime = new Date(currentTime).getTime();//当前时间
+                info.openTime = new Date(openTime).getTime();//开奖时间
+                info.closeTime = new Date(closeTime).getTime();//封盘时间
             }
         }
         this.startTimer()
@@ -106,9 +110,9 @@ export class PurchaseComponent {
         if (room.countDown && room.countDown > 0) {
             room.status = "waiting";
             return;
-        } else if ((!room.countDown || room.countDown <= 0) && room.current_play.result == null) {
+        } else if ((!room.countDown || room.countDown <= 0) && (room.openTime - room.currentTime) > 0) {
             room.status = "opening";
-        } else {
+        } else if((!room.countDown || room.countDown <= 0) && (room.openTime - room.currentTime) <= 0){
             room.status = "finish";
         }
     }
